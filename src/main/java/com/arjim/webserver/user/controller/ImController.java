@@ -9,6 +9,7 @@ import com.arjim.server.model.Session;
 import com.arjim.server.model.proto.MessageBodyProto;
 import com.arjim.server.model.proto.MessageProto;
 import com.arjim.server.proxy.MessageProxy;
+import com.arjim.server.redis.RedisDao;
 import com.arjim.server.session.impl.SessionManagerImpl;
 import com.arjim.util.ImUtils;
 import com.arjim.webserver.base.controller.BaseController;
@@ -22,7 +23,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -55,7 +55,7 @@ public class ImController extends BaseController {
 	private  SessionManagerImpl sessionManagerImpl;
 
 	@Autowired
-	RedisTemplate redisTemplate;
+	private RedisDao redisDao;
 
 	@Autowired
 	private UserGroupService userGroupServiceImpl;
@@ -77,9 +77,9 @@ public class ImController extends BaseController {
 		UserAccountEntity userAccount = userAccountServiceImpl.validateUser(query);
 		if (userAccount != null) {
 			userAccountServiceImpl.addLoginUser(userAccount);
-			String json = userAccount.getAccount()+":登陆即时通讯";
+			String json = userAccount.getAccount()+":login arjim-dis-server";
 			String v = JSON.toJSONString(json);
-			redisTemplate.opsForValue().set("USER-ONLINE-FLAG:"+userAccount.getId(), v,60);
+			redisDao.set("USER-ONLINE-FLAG:"+userAccount.getId(), v,60);
 		}
 		ImUserData us = new ImUserData();
 		us.setCode("0");

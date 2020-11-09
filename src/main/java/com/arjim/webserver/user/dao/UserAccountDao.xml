@@ -88,7 +88,7 @@
 		FROM
 		    sys_user users
 		LEFT JOIN ccm_user_relationship ship ON ship.user_id = users.id
-		WHERE users.del_flag = 0
+		WHERE users.deleteFlag = 0
 		AND ship.del_flag = 0 
 		AND ship.group_id = #{id}
 	</select>

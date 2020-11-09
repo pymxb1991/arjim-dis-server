@@ -14,6 +14,7 @@ import com.arjim.server.group.ImChannelGroup;
 import com.arjim.server.model.MessageWrapper;
 import com.arjim.server.model.Session;
 import com.arjim.server.proxy.MessageProxy;
+import com.arjim.server.redis.RedisDao;
 import com.arjim.server.session.impl.SessionManagerImpl;
 import com.arjim.webserver.user.model.UserAccountEntity;
 import com.arjim.webserver.user.service.UserAccountService;
@@ -23,7 +24,6 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.List;
 
@@ -38,7 +38,7 @@ public class ImConnertorImpl implements ImConnertor {
 
 
 	@Autowired
-	private RedisTemplate  redisTemplate;
+	private RedisDao redisDao;
 
 	public void setSessionManager(SessionManagerImpl sessionManager) {
 		this.sessionManager = sessionManager;
@@ -54,9 +54,9 @@ public class ImConnertorImpl implements ImConnertor {
 		// 设置心跳响应时间
 		hander.channel().attr(Constants.SessionConfig.SERVER_SESSION_HEARBEAT).set(System.currentTimeMillis());
 		final UserAccountEntity userAccountEntity = userAccountServiceImpl.selectById(wrapper.getSessionId());
-		String json = userAccountEntity.getAccount()+":登陆即时通讯";
+		String json = userAccountEntity.getAccount()+":login arjim-dis-server";
 		String v = JSON.toJSONString(json);
-		redisTemplate.opsForValue().set("USER-ONLINE-FLAG:"+wrapper.getSessionId(), v,60);
+		redisDao.set("USER-ONLINE-FLAG:"+wrapper.getSessionId(), v,60);
 	}
 
 	@Override

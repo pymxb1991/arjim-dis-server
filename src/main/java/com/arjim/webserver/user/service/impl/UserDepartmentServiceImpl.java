@@ -1,11 +1,11 @@
 package com.arjim.webserver.user.service.impl;
 
+import com.arjim.server.redis.RedisDao;
 import com.arjim.server.session.impl.SessionManagerImpl;
 import com.arjim.webserver.user.dao.UserDepartmentDao;
 import com.arjim.webserver.user.model.*;
 import com.arjim.webserver.user.service.UserDepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public class UserDepartmentServiceImpl implements UserDepartmentService {
 	private SessionManagerImpl sessionManager;
 
 	@Autowired
-	private RedisTemplate redisTemplate;
+	private RedisDao redisDao;
 
 	@Override
 	public UserDepartmentEntity queryObject(Long id) {

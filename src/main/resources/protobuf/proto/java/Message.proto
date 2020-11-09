@@ -1,0 +1,29 @@
+syntax = "proto3";
+package com.arjim.server.model.proto;
+option java_outer_classname="MessageProto";
+message Model {
+     string version = 1;//接口版本号
+     string deviceId = 2;//设备uuid
+     uint32 cmd = 3;//请求接口命令字  1绑定  2心跳   3上线   4下线 
+     string sender = 4;//发送人
+     string receiver = 5;//接收人
+     string groupId =6;//用户组编号
+     uint32 msgtype = 7;//请求1，应答2，通知3，响应4  format
+     uint32 flag = 8;//1 rsa加密 2aes加密
+     string platform = 9;//mobile-ios mobile-android pc-windows pc-mac
+     string platformVersion = 10;//客户端版本号
+     string token = 11;//客户端凭证
+     string appKey = 12;//客户端key
+     string timeStamp = 13;//时间戳
+     string sign = 14;//签名 
+     bytes content = 15;//请求数据
+     string resSign = 16;//响应标志位： agree 同意  refuse 拒绝
+     string reqType = 17;//请求方式 ptop 单聊  group 多聊
+     string vagroupId = 18;//视频语音群组ID，房间号
+     string callType = 19;//呼叫方式 发起者/接收者  caller/callee
+     string senderName = 20; //发送人姓名
+     string senderPhoto = 21; //发送人头像
+     string vagroupName = 22; ////视频语音群组名称，房间名称
+     string vaType = 23; ////视频，或语音类型
+}
+ 

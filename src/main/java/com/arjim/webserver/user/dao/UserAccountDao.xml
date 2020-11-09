@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.arjim.webserver.user.dao.UserAccountDao">
+	<sql id="Base_Column_List">
+		id,
+		loginName   AS "account",
+		`password`,
+		salt,
+		`name`,
+		userType,
+		userCode,
+		phone,
+		mobile,
+		address,
+		photo AS  "profilephoto",
+		loginIP,
+		loginDateTime,
+		`status` AS "disablestate",
+		email,
+		isEnable,
+		deleteFlag  AS "isdel",
+		createUserID,
+		createDateTime,
+		updateUserID,
+		updateDateTime,
+		remarks AS "signature",
+		sex
+	</sql>
+
+	<select id="queryObject"
+		resultType="com.arjim.webserver.user.model.UserAccountEntity">
+		select
+		<include refid="Base_Column_List" />
+		from sys_user where id = #{value}
+	</select>
+
+	<select id="queryObjectByAccount" resultType="com.arjim.webserver.user.model.UserAccountEntity">
+		SELECT
+		a.id ,
+		a.loginName  AS "account",
+		a.`password`, a.`status` AS "disablestate",
+		a.deleteFlag AS "isdel",
+		b.departID as "deptId",d.`name` as "deptName",
+		a.salt,		a.`name`,		a.userType,		a.userCode,		a.phone,		a.mobile,		a.address,
+		a.photo  AS  "profilephoto",
+		a.loginIP,		a.loginDateTime,	a.email,		a.isEnable,
+		a.createUserID,		a.createDateTime,		a.updateUserID,		a.updateDateTime,
+		a.remarks AS "signature",		a.sex
+		FROM
+		sys_user AS a
+		LEFT JOIN sys_user_dept as b on a.id = b.userID
+		LEFT JOIN sys_depart as d on b.departID = d.id
+		WHERE
+		a.loginName = #{account} and a.deleteFlag = '0'
+	</select>
+
+	<select id="queryList"
+		resultType="com.arjim.webserver.user.model.UserAccountEntity">
+		select
+		<include refid="Base_Column_List" />
+		from user_account
+		<choose>
+			<when test="sidx != null and sidx.trim() != ''">
+				order by ${sidx} ${order}
+			</when>
+			<otherwise>
+				order by id desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+
+	<select id="queryTotal" resultType="int">
+		select count(*) from
+		user_account
+	</select>
+
+	<select id="getGroupUser"
+		resultType="com.arjim.webserver.user.model.ImFriendUserInfoData">
+        SELECT
+		    users.id AS "id",
+		    users.`name` AS "username",
+		    users.photo AS "avatar",
+		    users.remarks AS "sign"
+		FROM
+		    sys_user users
+		LEFT JOIN ccm_user_relationship ship ON ship.user_id = users.id
+		WHERE users.del_flag = 0
+		AND ship.del_flag = 0 
+		AND ship.group_id = #{id}
+	</select>
+
+	<insert id="save"
+		parameterType="com.arjim.webserver.user.model.UserAccountEntity"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into user_account
+		(
+		`account`,
+		`password`,
+		`disablestate`,
+		`isdel`,
+		`createdate`,
+		`updatedate`,
+		`updateuser`
+		)
+		values
+		(
+		#{account},
+		#{password},
+		#{disablestate},
+		#{isdel},
+		NOW(),
+		NOW(),
+		#{updateuser}
+		)
+	</insert>
+
+	<update id="update"
+		parameterType="com.arjim.webserver.user.model.UserAccountEntity">
+		update user_account
+		<set>
+			<if test="account != null">`account` = #{account}, </if>
+			<if test="password != null">`password` = #{password}, </if>
+			<if test="disablestate != null">`disablestate` = #{disablestate}, </if>
+			<if test="isdel != null">`isdel` = #{isdel}, </if>
+			<if test="updatedate != null">`updatedate` = NOW(), </if>
+			<if test="updateuser != null">`updateuser` = #{updateuser}</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<delete id="delete">
+		delete from user_account where id = #{value}
+	</delete>
+
+	<delete id="deleteBatch">
+		delete from user_account where id in
+		<foreach item="id" collection="array" open="(" separator=","
+			close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

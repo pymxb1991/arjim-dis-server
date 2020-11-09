@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.arjim.webserver.user.dao.UserDepartmentDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+	<resultMap
+		type="com.arjim.webserver.user.model.UserDepartmentEntity"
+		id="userDepartmentMap">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="count" column="count" />
+		<result property="level" column="level" />
+		<result property="parentid" column="parentid" />
+		<result property="remark" column="remark" />
+		<result property="createdate" column="createdate" />
+		<result property="updatedate" column="updatedate" />
+		<result property="updateuser" column="updateuser" />
+		<result property="isdel" column="isdel" />
+	</resultMap>
+
+	<resultMap
+		type="com.arjim.webserver.user.model.ImFriendUserData"
+		id="userFriendMap">
+		<result property="id" column="id" />
+		<result property="groupname" column="groupname" />
+		<!-- 一对多查询 -->
+		<collection property="list" column="id"
+			select="queryFriendUser"></collection>
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id ,
+		name ,
+		count ,
+		level ,
+		parentid ,
+		remark ,
+		createdate ,
+		updatedate ,
+		updateuser ,
+		isdel
+	</sql>
+
+	<select id="queryObject"
+		resultType="com.arjim.webserver.user.model.UserDepartmentEntity">
+		select
+		<include refid="Base_Column_List" />
+		from user_department where id = #{value}
+	</select>
+
+	<select id="queryFriendUser"
+		resultType="com.arjim.webserver.user.model.ImFriendUserInfoData">
+		select uid as id ,name as username , signature as sign ,
+		profilephoto as avatar from user_info where deptid = #{id}
+	</select>
+
+	<select id="queryGroupAndUser"
+		resultType="com.arjim.webserver.user.model.ImFriendUserInfo">
+		SELECT
+		users.id AS "id",
+		users.`name` AS "username",
+		users.photo AS "avatar",
+		users.remarks AS "sign",
+		users.login_date AS "loginDate",
+		office.id AS "officeId",
+		office.`name` AS "groupname"
+		FROM
+		sys_user users
+		LEFT JOIN sys_office office ON users.office_id = office.id
+		WHERE
+		users.del_flag = 0
+		AND office.del_flag = 0
+		AND office.USEABLE = 1
+	</select>
+
+	<select id="queryOffice"
+		resultType="com.arjim.webserver.user.model.ImGroupUserData">
+		SELECT
+		office.id AS "id",
+		office.`name` AS "groupname"
+		FROM
+		sys_depart office
+		WHERE
+		office.deleteFlag = 0
+		ORDER BY office.sortNo ASC
+	</select>
+	<resultMap id="BaseOfficeUserInfo" type="com.arjim.webserver.user.model.ImOfficeUser" >
+		<id column="officeId" property="officeId"  />
+		<result column="officeParentId" property="officeParentId"   />
+		<result column="officeName" property="officeName"   />
+		<result column="officeType" property="officeType"   />
+		<collection property="userList" ofType="com.arjim.webserver.user.model.ImOfficeUserInfo">
+			<id column="userId" property="userId"   />
+			<result column="username" property="username"   />
+			<result column="avatar" property="avatar"   />
+			<result column="sign" property="sign"   />
+			<result column="loginDate" property="loginDate"  javaType="DATE" />
+		</collection>
+	</resultMap>
+
+	<select id="queryOfficeUser" resultMap="BaseOfficeUserInfo" >
+		SELECT
+			 t1.id AS "officeId"
+			,t1.parent_id AS "officeParentId"
+			,t1.`name` AS  "officeName"
+			,t1.type  AS "officeType"
+			,t2.id  AS "userId"
+			,t2.`name`  AS "username"
+			,t2.photo AS "avatar"
+			,t2.remarks AS "sign"
+			,t2.login_date AS "loginDate"
+		FROM
+			sys_office t1
+			LEFT JOIN sys_user t2 on t1.id = t2.office_id
+			WHERE
+				t1.del_flag = '0' and t2.del_flag = '0'
+			ORDER BY t1.type, t1.`name`
+	</select>
+
+	<select id="queryList"
+		resultType="com.arjim.webserver.user.model.UserDepartmentEntity">
+		select
+		<include refid="Base_Column_List" />
+		from user_department
+		<choose>
+			<when test="sidx != null and sidx.trim() != ''">
+				order by ${sidx} ${order}
+			</when>
+			<otherwise>
+				order by id desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+
+	<select id="queryTotal" resultType="int">
+		select count(*) from
+		user_department
+	</select>
+
+	<select id="findAllUserByOffice"
+		resultType="com.arjim.webserver.user.model.ImFriendUserInfoData">
+		SELECT
+		a.id id,
+		a.`name` username,
+		a.photo avatar,
+		a.remarks sign,
+		'offline' status,
+		o.`name` groupname,
+		a.sip_user_name sipUserName
+		FROM v_ccm_team a, sys_office o
+		<where>
+			a.del_flag = 0
+			AND a.office_id = o.id
+			AND o.del_flag = 0
+			<if test="id != null and id != ''">
+				AND (o.parent_ids LIKE concat('%',#{id},'%') OR o.id = #{id})
+			</if>
+		</where>
+	</select>
+	
+	<select id="findUserByOffice"
+		resultType="com.arjim.webserver.user.model.ImFriendUserInfoData">
+		SELECT
+		a.id id,
+		a.`name` username,
+		a.photo avatar,
+		a.remarks sign,
+		'offline' status,
+		o.`name` groupname
+		FROM sys_user a, sys_user_dept  b ,sys_depart o
+		<where>
+			a.id = b.userID
+			and b.departID = o.id
+			and o.deleteFlag = 0 and a.deleteFlag = 0
+			<if test="id != null and id != ''">
+				AND o.id = #{id}
+			</if>
+		</where>
+	</select>
+
+	<select id="getGroup"
+		resultType="com.arjim.webserver.user.model.ImGroupUserData">
+        SELECT
+		    groups.id,
+		    groups.groupname,
+		    groups.avatar ,
+		    groups.group_owner  groupowner
+		FROM
+		    ccm_user_group groups
+		    LEFT JOIN ccm_user_relationship ship ON ship.group_id = groups.id
+		WHERE
+		    groups.del_flag = 0
+		    AND ship.del_flag = 0
+		    AND ship.user_id = #{id}
+	</select>
+
+	<insert id="save"
+		parameterType="com.arjim.webserver.user.model.UserDepartmentEntity"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into user_department
+		(
+		`name`,
+		`count`,
+		`level`,
+		`parentid`,
+		`remark`,
+		`createdate`,
+		`updatedate`,
+		`updateuser`,
+		`isdel`
+		)
+		values
+		(
+		#{name},
+		#{count},
+		#{level},
+		#{parentid},
+		#{remark},
+		#{createdate},
+		#{updatedate},
+		#{updateuser},
+		#{isdel}
+		)
+	</insert>
+
+	<update id="update"
+		parameterType="com.arjim.webserver.user.model.UserDepartmentEntity">
+		update user_department
+		<set>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="count != null">`count` = #{count}, </if>
+			<if test="level != null">`level` = #{level}, </if>
+			<if test="parentid != null">`parentid` = #{parentid}, </if>
+			<if test="remark != null">`remark` = #{remark}, </if>
+			<if test="createdate != null">`createdate` = #{createdate}, </if>
+			<if test="updatedate != null">`updatedate` = #{updatedate}, </if>
+			<if test="updateuser != null">`updateuser` = #{updateuser}, </if>
+			<if test="isdel != null">`isdel` = #{isdel}</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<update id="updateSign"
+		parameterType="com.arjim.webserver.user.model.ImFriendUserInfo">
+		update sys_user
+		<set>
+			<if test="sign !=null and sign != ''">
+				remarks = #{sign}
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<delete id="delete">
+		delete from user_department where id = #{value}
+	</delete>
+
+	<delete id="deleteBatch">
+		delete from user_department where id in
+		<foreach item="id" collection="array" open="(" separator=","
+			close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+	<select id="findGroupById"
+			resultType="com.arjim.webserver.user.model.ImGroupUserData">
+        SELECT
+		    groups.id,
+		    groups.groupname,
+		    groups.avatar ,
+		    groups.group_owner  groupowner
+		FROM
+		    ccm_user_group groups
+		WHERE
+		    groups.del_flag = 0
+		    AND groups.id = #{id}
+	</select>
+
+</mapper>

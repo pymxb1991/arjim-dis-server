@@ -1,6 +1,6 @@
 package com.arjim.webserver.user.service.impl;
 
-import com.arjim.server.redis.RedisDao;
+import com.arjim.server.redis.RedisUtil;
 import com.arjim.server.session.impl.SessionManagerImpl;
 import com.arjim.webserver.user.dao.UserDepartmentDao;
 import com.arjim.webserver.user.model.*;
@@ -19,7 +19,7 @@ public class UserDepartmentServiceImpl implements UserDepartmentService {
 	private SessionManagerImpl sessionManager;
 
 	@Autowired
-	private RedisDao redisDao;
+	private RedisUtil redisDao;
 
 	@Override
 	public UserDepartmentEntity queryObject(Long id) {

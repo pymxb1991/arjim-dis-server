@@ -1,6 +1,5 @@
 package com.arjim.webserver.user.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.arjim.constant.Constants;
@@ -9,7 +8,7 @@ import com.arjim.server.model.Session;
 import com.arjim.server.model.proto.MessageBodyProto;
 import com.arjim.server.model.proto.MessageProto;
 import com.arjim.server.proxy.MessageProxy;
-import com.arjim.server.redis.RedisDao;
+import com.arjim.server.redis.RedisUtil;
 import com.arjim.server.session.impl.SessionManagerImpl;
 import com.arjim.util.ImUtils;
 import com.arjim.webserver.base.controller.BaseController;
@@ -55,7 +54,7 @@ public class ImController extends BaseController {
 	private  SessionManagerImpl sessionManagerImpl;
 
 	@Autowired
-	private RedisDao redisDao;
+	private RedisUtil redisDao;
 
 	@Autowired
 	private UserGroupService userGroupServiceImpl;
@@ -78,8 +77,7 @@ public class ImController extends BaseController {
 		if (userAccount != null) {
 			userAccountServiceImpl.addLoginUser(userAccount);
 			String json = userAccount.getAccount()+":login arjim-dis-server";
-			String v = JSON.toJSONString(json);
-			redisDao.set("USER-ONLINE-FLAG:"+userAccount.getId(), v,60);
+			redisDao.set("USER-ONLINE-FLAG:"+userAccount.getId(), json,60);
 		}
 		ImUserData us = new ImUserData();
 		us.setCode("0");

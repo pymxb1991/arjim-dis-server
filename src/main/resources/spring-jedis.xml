@@ -19,45 +19,21 @@
 
     <!-- 加载配置属性文件 -->
 	<context:property-placeholder ignore-unresolvable="true" location="classpath:db.properties" />
-	<!-- 初始化Jedis连接池-->
-	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
-		<!--最大连接数, 默认8个 ${redis.maxTotal}-->
-		<property name="maxTotal" value="8" />
-		<!--最大空闲连接数, 默认50 ${redis.maxIdle}-->
-		<property name="maxIdle" value="50" />
-		<!--获得一个jedis实例的时候是否检查连接可用性-->
-		<property name="testOnBorrow" value="${redis.testOnBorrow}" />
+	<!--配置JedisPoolConfig 实例-->
+	<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxIdle" value="${redis.maxIdle}"/>
+		<property name="maxTotal" value="${redis.maxTotal}"/>
 	</bean>
-	<!--链接redis-->
-	<bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
-		<property name="hostName" value="${redis.host}"></property>
-		<property name="port" value="${redis.port}"></property>
-		<property name="poolConfig" ref="jedisPoolConfig"></property>
-	</bean>
-	<!-- 创建redis模板工具类 -->
-	<!--    </bean>-->
-	<bean id="redisTemplate"
-		  class="org.springframework.data.redis.core.StringRedisTemplate">
-		<property name="connectionFactory" ref="connectionFactory" />
-		<!-- 如果不配置Serializer，那么存储的时候只能使用String，如果用对象类型存储，那么会提示错误 can't cast to String！！！-->
-		<property name="keySerializer">
-            <!--对key的默认序列化器。默认值是StringSerializer-->
-            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
-        </property>
-        <!--是对value的默认序列化器，默认值是取自DefaultSerializer的JdkSerializationRedisSerializer。-->
-        <property name="valueSerializer">
-            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
-        </property>
-        <!--存储Map时key需要的序列化配置-->
-        <property name="hashKeySerializer">
-            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
-        </property>
-        <!--存储Map时value需要的序列化配置-->
-        <property name="hashValueSerializer">
-            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
-        </property>
 
-        <!--开启事务  -->
-        <property name="enableTransactionSupport" value="true"></property>
+	<!--配置jedisConnectionFactory-->
+	<bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+		<property name="hostName" value="${redis.host}"/>
+		<property name="port" value="${redis.port}"/>
+		<property name="poolConfig" ref="poolConfig"/>
+	</bean>
+
+	<!--配置RedisTemplate-->
+	<bean id="rediTeplate" class="com.arjim.server.redis.RedisConfig">
+		<constructor-arg ref="jedisConnectionFactory"/>
 	</bean>
 </beans>

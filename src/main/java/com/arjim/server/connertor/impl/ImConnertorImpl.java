@@ -6,7 +6,6 @@
  */
 package com.arjim.server.connertor.impl;
 
-import com.alibaba.fastjson.JSON;
 import com.arjim.constant.Constants;
 import com.arjim.server.connertor.ImConnertor;
 import com.arjim.server.exception.PushException;
@@ -14,7 +13,7 @@ import com.arjim.server.group.ImChannelGroup;
 import com.arjim.server.model.MessageWrapper;
 import com.arjim.server.model.Session;
 import com.arjim.server.proxy.MessageProxy;
-import com.arjim.server.redis.RedisDao;
+import com.arjim.server.redis.RedisUtil;
 import com.arjim.server.session.impl.SessionManagerImpl;
 import com.arjim.webserver.user.model.UserAccountEntity;
 import com.arjim.webserver.user.service.UserAccountService;
@@ -38,7 +37,7 @@ public class ImConnertorImpl implements ImConnertor {
 
 
 	@Autowired
-	private RedisDao redisDao;
+	private RedisUtil redisDao;
 
 	public void setSessionManager(SessionManagerImpl sessionManager) {
 		this.sessionManager = sessionManager;
@@ -55,8 +54,7 @@ public class ImConnertorImpl implements ImConnertor {
 		hander.channel().attr(Constants.SessionConfig.SERVER_SESSION_HEARBEAT).set(System.currentTimeMillis());
 		final UserAccountEntity userAccountEntity = userAccountServiceImpl.selectById(wrapper.getSessionId());
 		String json = userAccountEntity.getAccount()+":login arjim-dis-server";
-		String v = JSON.toJSONString(json);
-		redisDao.set("USER-ONLINE-FLAG:"+wrapper.getSessionId(), v,60);
+		redisDao.set("USER-ONLINE-FLAG:"+wrapper.getSessionId(), json,60);
 	}
 
 	@Override

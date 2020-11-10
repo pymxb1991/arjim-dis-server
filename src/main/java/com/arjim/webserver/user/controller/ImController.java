@@ -18,6 +18,7 @@ import com.arjim.webserver.user.model.*;
 import com.arjim.webserver.user.service.*;
 import com.arjim.webserver.util.Query;
 import groovy.util.logging.Slf4j;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -29,6 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.*;
 
 @CrossOrigin
@@ -61,6 +63,8 @@ public class ImController extends BaseController {
 
 	@Autowired
 	private UserRelationShipService userRelationShipServiceImpl;
+
+
 	/**
 	 * 登录IM
 	 *
@@ -86,7 +90,14 @@ public class ImController extends BaseController {
 		return us;
 	}
 
-
+	/**
+	 * 创建群组添加人员
+	 * @param userGroup
+	 * @param response
+	 * @param request
+	 * @return
+	 * @throws Exception
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/saveGroups",  produces = "text/html;charset=UTF-8",method = RequestMethod.POST)
 	public ImUserData saveGroups(UserGroupEntity userGroup, HttpServletResponse response, HttpServletRequest request) throws Exception {
@@ -139,6 +150,36 @@ public class ImController extends BaseController {
 		return us;
 	}
 
+	/**
+	 *   退出群组(IM中退群)
+	 * @param userId  当前用户ID
+	 * @param groupId  所前所属群组ID
+	 * @return
+	 * @author mao
+	 * @version 2018-03-08
+	 */
+	@RequestMapping(value="/leaveGroup", method = RequestMethod.POST)
+	@ApiOperation(value = " 退出群组")
+	public ImUserData leaveGroup(@RequestParam  String userId, @RequestParam String groupId, HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		ImUserData us = new ImUserData();
+		if (StringUtils.isEmpty(userId)) {
+			us.setCode("-9");// //用户没有权限
+			return us;
+		}
+		if (StringUtils.isEmpty(groupId)) {
+			us.setCode("-1"); ////参数错误
+			return us;
+		}
+		//先判断当前用户是不是群主,如果是群主需要把群主移交给其它人
+		String data = userGroupServiceImpl.updateGroupOwenId(userId, groupId);
+		//如果不是群主，直接删除，
+		//int i = userRelationShipServiceImpl.deleteByGroupIdAndUserId(userId, groupId);
+		us.setCode("0");
+		us.setData(data); //群主退群把新的群主返回去
+		us.setMsg("");
+		return us;
+
+	}
 	/**
 	 *   出警建群组
 	 * @param response

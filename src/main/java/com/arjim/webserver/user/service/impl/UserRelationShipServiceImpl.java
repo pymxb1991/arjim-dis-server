@@ -39,4 +39,9 @@ public class UserRelationShipServiceImpl implements UserRelationShipService {
 	public List<String> selectByGroupId(String id) {
 		return userRelationShipDao.findUserListByGroupId(id);
 	}
+
+	@Override
+	public int deleteByGroupIdAndUserId(String userId, String groupId) {
+		return userRelationShipDao.deleteByGroupIdAndUserId(userId,groupId);
+	}
 }

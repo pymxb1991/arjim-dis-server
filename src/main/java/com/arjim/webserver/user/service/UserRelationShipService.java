@@ -20,4 +20,6 @@ public interface UserRelationShipService {
 	void save(UserRelationShipEntity userRelationShip);
 
 	List<String> selectByGroupId(String id);
+
+	int deleteByGroupIdAndUserId(String userId, String groupId);
 }

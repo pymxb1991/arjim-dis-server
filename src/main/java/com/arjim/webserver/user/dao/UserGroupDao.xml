@@ -6,9 +6,9 @@
 		a.id AS "id",
 		a.groupname AS "groupname",
 		a.avatar AS "avatar",
-		a.create_by AS "createBy.id",
+		a.create_by AS "createBy",
 		a.create_date AS "createDate",
-		a.update_by AS "updateBy.id",
+		a.update_by AS "updateBy",
 		a.update_date AS "updateDate",
 		a.remarks AS "remarks",
 		a.group_owner AS "groupOwnerId",
@@ -48,7 +48,7 @@
 		UPDATE ccm_user_group SET 	
 			groupname = #{groupname},
 			avatar = #{avatar},
-			update_by = #{updateBy.id},
+			update_by = #{id},
 			update_date = #{updateDate},
 			remarks = #{remarks},
 			group_owner = #{groupOwnerId}

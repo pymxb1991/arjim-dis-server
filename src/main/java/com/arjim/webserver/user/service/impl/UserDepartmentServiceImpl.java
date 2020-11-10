@@ -2,6 +2,7 @@ package com.arjim.webserver.user.service.impl;
 
 import com.arjim.server.redis.RedisUtil;
 import com.arjim.server.session.impl.SessionManagerImpl;
+import com.arjim.util.ImUtils;
 import com.arjim.webserver.user.dao.UserDepartmentDao;
 import com.arjim.webserver.user.model.*;
 import com.arjim.webserver.user.service.UserDepartmentService;
@@ -107,7 +108,21 @@ public class UserDepartmentServiceImpl implements UserDepartmentService {
 
 	@Override
 	public List<ImGroupUserData> getGroup(UserAccountEntity loginUser) {
-		return userDepartmentDao.getGroup(loginUser);
+		List<ImGroupUserData> groups = userDepartmentDao.getGroup(loginUser);
+		groups.forEach(group->{
+			String avatar = group.getAvatar();
+			String hostAddress = null;
+			String serverPort = null;
+			try {
+				hostAddress = ImUtils.getHostAddress();
+				serverPort = ImUtils.getServerPort(false);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			String fileUrl = "http://"+ hostAddress+":"+serverPort + "/"+avatar;
+			group.setAvatar(fileUrl);
+		});
+		return groups;
 	}
 
 	@Override

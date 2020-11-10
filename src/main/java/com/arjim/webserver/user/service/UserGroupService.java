@@ -16,4 +16,6 @@ public interface UserGroupService {
     void save(UserGroupEntity userGroup);
 
     String updateGroupOwenId(String userId, String groupId);
+
+    void update(UserGroupEntity userGroup);
 }

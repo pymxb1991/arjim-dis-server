@@ -4,6 +4,7 @@ import com.arjim.webserver.base.dao.BaseDao;
 import com.arjim.webserver.user.model.ImFriendUserData;
 import com.arjim.webserver.user.model.ImFriendUserInfoData;
 import com.arjim.webserver.user.model.UserAccountEntity;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import java.util.Map;
  * @description
  * @date 2020-11-27 09:38:52
  */
+@Repository
 public interface UserAccountDao extends BaseDao<UserAccountEntity> {
 	public UserAccountEntity queryObjectByAccount(Map<String, Object> map);
 	public List<ImFriendUserInfoData> getGroupUser(ImFriendUserData imFriendUserData);

@@ -32,6 +32,10 @@ public class UserGroupServiceImpl implements UserGroupService {
 	public void save(UserGroupEntity userGroup) {
 		userGroupDao.save(userGroup);
 	}
+    @Override
+    public void update(UserGroupEntity userGroup) {
+        userGroupDao.update(userGroup);
+    }
 
 	/**
 	 *  更新群主信息，返回新的群主；
@@ -64,6 +68,8 @@ public class UserGroupServiceImpl implements UserGroupService {
 		}
 		return  data;
 	}
+
+
 
 
 }

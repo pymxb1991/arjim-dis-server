@@ -23,6 +23,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -104,7 +107,19 @@ public class ImController extends BaseController {
 
 		response.setContentType("application/json; charset=UTF-8");
 		ImUserData us = new ImUserData();
-
+		if (userGroup.getId()!= null && !"".equals(userGroup.getId())) {
+			UserGroupEntity userGroupEntity = userGroupServiceImpl.selectById(userGroup.getId());
+			if (userGroupEntity == null ) {//从数据库中没有取到对应数据
+				us.setCode("-13");////数据不存在
+				return us;
+			}
+			String userId = userGroup.getUserId();
+			String groupOwnerId = userGroupEntity.getGroupOwnerId();
+			if(!userId.equals(groupOwnerId)){	//如果操作者不是群创建者，提示无权限
+				us.setCode("-9");//用户没有权限
+				return us;
+			}
+		}
 		UserAccountEntity loginUser = userAccountServiceImpl.getLoginUser(userGroup.getUserId());
 		List<String> userListVo = userGroup.getUserList();
 		if(null == userListVo && userListVo.isEmpty()){
@@ -120,10 +135,16 @@ public class ImController extends BaseController {
 		if (StringUtils.isEmpty(userGroup.getGroupname())){//如果没有设置群名称，则为用户名称 + 的临时群组
 			userGroup.setGroupname(loginUser.getName() + "的临时群组");
 		}
-		//根据ID，删除群组用户
+		//根据ID，修改组信息，然后删除群组用户
 		String groupId = userGroup.getId();
 		if(!StringUtils.isEmpty(groupId)){
 			userRelationShipServiceImpl.deleteRelByGroupId(userGroup.getId());
+			userGroup.setCreateBy(loginUser.getId());
+			userGroup.setCreateDate(new Date());
+			userGroup.setUpdateBy(loginUser.getId());
+			userGroup.setUpdateDate(new Date());
+			userGroup.setDelFlag("0");
+			userGroupServiceImpl.update(userGroup);
 		}else{
 			groupId = UUID.randomUUID().toString();
 			userGroup.setId(groupId);
@@ -145,6 +166,11 @@ public class ImController extends BaseController {
 			userRelationShipServiceImpl.save(UserRelationship);
 		}
 		userGroup.setType("group");
+		String avatar = userGroup.getAvatar();
+		String hostAddress = ImUtils.getHostAddress();
+		String serverPort = ImUtils.getServerPort(false);
+		String fileUrl = "http://"+ hostAddress+":"+serverPort + "/"+avatar;
+		userGroup.setAvatar(fileUrl);
 		us.setData(userGroup);
 		us.setCode("0");
 		return us;
@@ -158,6 +184,7 @@ public class ImController extends BaseController {
 	 * @author mao
 	 * @version 2018-03-08
 	 */
+	@ResponseBody
 	@RequestMapping(value="/leaveGroup", method = RequestMethod.POST)
 	@ApiOperation(value = " 退出群组")
 	public ImUserData leaveGroup(@RequestParam  String userId, @RequestParam String groupId, HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -325,14 +352,14 @@ public class ImController extends BaseController {
 			my.setId(loginUser.getId());
 			my.setUsername(loginUser.getName());
 			String file1 = "";
-			String hostAddress = ImUtils.getHostAddress();
-			final String serverPort = ImUtils.getServerPort(false);
-			String fileUrl = "http://"+ hostAddress+":"+serverPort + file1;
+			//String hostAddress = ImUtils.getHostAddress();
+			//final String serverPort = ImUtils.getServerPort(false);
+			//String fileUrl = "http://"+ hostAddress+":"+serverPort + file1;
 		/*	if (StringUtils.isNotEmpty(file1)) {
 				String fileUrl = Global.getConfig("FILE_UPLOAD_URL");
 				eventIncident.setFile1(fileUrl + file1);
 			}*/
-			my.setAvatar( fileUrl + request.getContextPath() + loginUser.getProfilephoto());
+			my.setAvatar(loginUser.getProfilephoto());
 			my.setSign(loginUser.getSignature());
 			my.setStatus("online");
 			// 获取用户分组 及用户
@@ -347,6 +374,11 @@ public class ImController extends BaseController {
 					//查询所有在线用户  修改在线状态
 					Session[] sessions = sessionManagerImpl.getSessions();
 					for (ImFriendUserInfoData userBean : listUser) {
+						String avatar = userBean.getAvatar();
+						String hostAddress = ImUtils.getHostAddress();
+						String serverPort = ImUtils.getServerPort(false);
+						String fileUrl = "http://"+ hostAddress+":"+serverPort + "/"+avatar;
+						userBean.setAvatar(fileUrl);
 						for (int i = 0; i < sessions.length; i++) {
 							if(userBean.getId().equals(sessions[i].getAccount())) {
 								userBean.setStatus("online");
@@ -390,14 +422,18 @@ public class ImController extends BaseController {
 		
 		UserAccountEntity u = userAccountServiceImpl.getLoginUser(userId);
 		String uid = u.getId();
-		String path = request.getSession().getServletContext().getRealPath("upload/img/temp/");
+		//String path = request.getSession().getServletContext().getRealPath("upload/img/temp/");
+		Resource resource = new ClassPathResource("/resource.properties");
+		Properties props = PropertiesLoaderUtils.loadProperties(resource);
+		String path = (String) props.get("uploadpath");
+
 		String files = filesInfoServiceImpl.savePicture(file, uid.toString() + UUID.randomUUID().toString(), path);
 		Map<String, Object> map = new HashMap<String, Object>();
 		Map<String, String> submap = new HashMap<String, String>();
 		if (files.length() > 0) {
 			map.put("code", "0");
 			map.put("msg", "上传过成功");
-			submap.put("src","/upload/img/temp/" + files + "?" + new Date().getTime());
+			submap.put("src",files + "?" + new Date().getTime());
 		} else {
 			submap.put("src", "");
 			map.put("code", "1");

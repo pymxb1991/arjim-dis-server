@@ -84,7 +84,7 @@ public class UserAccountServiceImpl implements UserAccountService {
 				String file1 = user.getProfilephoto();
 				String hostAddress = ImUtils.getHostAddress();
 				String serverPort = ImUtils.getServerPort(false);
-				String fileUrl = "http://"+ hostAddress+":"+serverPort + file1;
+				String fileUrl = "http://"+ hostAddress+":"+serverPort + "/"+file1;
 				user.setProfilephoto(fileUrl);
 				return user;
 			} catch (Exception e) {
@@ -112,7 +112,21 @@ public class UserAccountServiceImpl implements UserAccountService {
 
 	@Override
 	public List<ImFriendUserInfoData> getGroupUser(ImFriendUserData imFriendUserData) {
-		return userAccountDao.getGroupUser(imFriendUserData);
+		List<ImFriendUserInfoData> groupUsers = userAccountDao.getGroupUser(imFriendUserData);
+		groupUsers.forEach(groupUser->{
+			String file1 = groupUser.getAvatar();
+			String hostAddress = null;
+			String serverPort = null;
+			try {
+				hostAddress = ImUtils.getHostAddress();
+				serverPort = ImUtils.getServerPort(false);
+				String fileUrl = "http://"+ hostAddress+":"+serverPort + "/"+file1;
+				groupUser.setAvatar(fileUrl);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
+		return groupUsers;
 	}
 
 

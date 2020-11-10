@@ -148,6 +148,7 @@ public class ImConnertorImpl implements ImConnertor {
 				sessionManager.removeSession(sessionId, nid);
 				ImChannelGroup.remove(hander.channel());
 				log.info("connector close sessionId -> " + sessionId + " success ");
+				redisDao.del("USER-ONLINE-FLAG:"+sessionId);
 			}
 		} catch (Exception e) {
 			log.error("connector close sessionId -->" + sessionId + "  Exception.", e);

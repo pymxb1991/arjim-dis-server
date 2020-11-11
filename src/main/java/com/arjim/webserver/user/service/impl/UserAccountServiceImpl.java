@@ -2,7 +2,9 @@ package com.arjim.webserver.user.service.impl;
 
 import com.arjim.util.ImUtils;
 import com.arjim.webserver.user.dao.UserAccountDao;
-import com.arjim.webserver.user.model.*;
+import com.arjim.webserver.user.model.ImFriendUserData;
+import com.arjim.webserver.user.model.ImFriendUserInfoData;
+import com.arjim.webserver.user.model.UserAccountEntity;
 import com.arjim.webserver.user.service.UserAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,7 @@ public class UserAccountServiceImpl implements UserAccountService {
 	public static ConcurrentHashMap<String, UserAccountEntity> loginUser = new ConcurrentHashMap<String, UserAccountEntity>();
 	@Autowired
 	private UserAccountDao userAccountDao;
+
 //	@Autowired
 //	private UserInfoService userInfoServiceImpl;
 
@@ -113,6 +116,15 @@ public class UserAccountServiceImpl implements UserAccountService {
 	@Override
 	public List<ImFriendUserInfoData> getGroupUser(ImFriendUserData imFriendUserData) {
 		List<ImFriendUserInfoData> groupUsers = userAccountDao.getGroupUser(imFriendUserData);
+		//查询所有在线用户  修改在线状态
+		for (ImFriendUserInfoData userBean : groupUsers) {
+			UserAccountEntity userAccountEntity = loginUser.get(userBean.getId());
+			if (userAccountEntity != null) {
+				userBean.setStatus("online");
+			}else{
+				userBean.setStatus("offline");
+			}
+		}
 		groupUsers.forEach(groupUser->{
 			String file1 = groupUser.getAvatar();
 			String hostAddress = null;

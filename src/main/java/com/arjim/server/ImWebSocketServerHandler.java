@@ -20,6 +20,9 @@ import io.netty.handler.timeout.IdleStateEvent;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Date;
+
 //＃1客户端/用户连接到服务器并加入聊天
 @Sharable
 public class ImWebSocketServerHandler extends SimpleChannelInboundHandler<MessageProto.Model> {
@@ -47,13 +50,21 @@ public class ImWebSocketServerHandler extends SimpleChannelInboundHandler<Messag
 				builder.setMsgtype(Constants.ProtobufType.SEND);
 				ctx.channel().writeAndFlush(builder);
 			}
+			System.out.println("心跳发送 ：sessionId: "+sessionId +"  Date:" + new Date());
+			log.info ("心跳发送 ：sessionId: "+sessionId +"  Date:" + new Date());
+			log.debug ("心跳发送 ：sessionId: "+sessionId +"  Date:" + new Date());
 			log.debug(IdleState.WRITER_IDLE + "... from " + sessionId + "-->" + ctx.channel().remoteAddress() + " nid:"
 					+ ctx.channel().id().asShortText());
 		}
 
 		// 如果心跳请求发出70秒内没收到响应，则关闭连接
 		if (o instanceof IdleStateEvent && ((IdleStateEvent) o).state().equals(IdleState.READER_IDLE)) {
-
+			//ALL_IDLE: 一段时间内没有数据接收或者发送
+			//READER_IDLE ： 一段时间内没有数据接收
+			//WRITER_IDLE ： 一段时间内没有数据发送
+			System.out.println("心跳超时 ：sessionId: "+sessionId +"  Date:" + new Date());
+			log.info ("心跳超时 ：sessionId: "+sessionId +"  Date:" + new Date());
+			log.debug ("心跳超时 ：sessionId: "+sessionId +"  Date:" + new Date());
 			log.debug(IdleState.READER_IDLE + "... from " + sessionId + " nid:" + ctx.channel().id().asShortText());
             //服务端收到上一次的心跳响应后会设置这个响应时间
 			Long lastTime = (Long) ctx.channel().attr(Constants.SessionConfig.SERVER_SESSION_HEARBEAT).get();

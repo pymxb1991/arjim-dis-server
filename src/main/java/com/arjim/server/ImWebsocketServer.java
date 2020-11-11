@@ -33,6 +33,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static io.netty.buffer.Unpooled.wrappedBuffer;
 
@@ -116,9 +117,9 @@ public class ImWebsocketServer {
 				});
 				// 协议包解码时指定Protobuf字节数实例化为CommonProtocol类型
 				pipeline.addLast(decoder);
-				//入参说明: 读超时时间、写超时时间、所有类型的超时时间、时间格式
+				//入参说明: 读超时、写超时、所有类型的超时、时间格式
 				pipeline.addLast(new IdleStateHandler(Constants.ImserverConfig.READ_IDLE_TIME,
-						Constants.ImserverConfig.WRITE_IDLE_TIME, 0));
+						Constants.ImserverConfig.WRITE_IDLE_TIME, 0, TimeUnit.SECONDS));
 				// 业务处理器
 				pipeline.addLast(new ImWebSocketServerHandler(proxy, connertor));
 

@@ -35,6 +35,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @CrossOrigin
 @Controller
@@ -166,10 +167,7 @@ public class ImController extends BaseController {
 			userRelationShipServiceImpl.save(UserRelationship);
 		}
 		userGroup.setType("group");
-		String avatar = userGroup.getAvatar();
-		String hostAddress = ImUtils.getHostAddress();
-		String serverPort = ImUtils.getServerPort(false);
-		String fileUrl = "http://"+ hostAddress+":"+serverPort + "/"+avatar;
+		String fileUrl = getAvatraFullPath(userGroup.getAvatar());
 		userGroup.setAvatar(fileUrl);
 		us.setData(userGroup);
 		us.setCode("0");
@@ -282,7 +280,9 @@ public class ImController extends BaseController {
 		List<String> userDtoList = new ArrayList<>();
 		if(userGroupEntity != null){
 			groupUserIds = userRelationShipServiceImpl.selectByGroupId(userGroup.getId());
-			userDtoList = getUserList(userListVo,groupUserIds);
+			groupUserIds.addAll(userListVo);
+			userDtoList = groupUserIds.parallelStream().distinct().collect(Collectors.toList());
+			userRelationShipServiceImpl.deleteRelByGroupId(userGroup.getId());
 		}else{
 			userGroupEntity = new UserGroupEntity();
 			BeanUtils.copyProperties(userGroup,userGroupEntity);
@@ -291,6 +291,7 @@ public class ImController extends BaseController {
 			userGroupEntity.setUpdateDate(new Date());
 			userGroupEntity.setDelFlag("0");
 			userGroupServiceImpl.save(userGroupEntity);
+			userDtoList.addAll(userListVo);
 		}
 		for(String userId : userDtoList){
 			UserRelationShipEntity UserRelationship = new UserRelationShipEntity();
@@ -307,24 +308,6 @@ public class ImController extends BaseController {
 		return us;
 	}
 
-	/**
-	 *  过滤已经存在的人员；
-	 * @param userListVo
-	 * @param groupUserIds
-	 * @return
-	 */
-	private List<String> getUserList(List<String> userListVo, List<String> groupUserIds) {
-		List<String> userList = new ArrayList<>();
-		for(String u1:groupUserIds){//旧用户
-			for(String u2:userListVo){//新用户
-				if(u1.equals(u2)){
-					continue;
-				}
-				userList.add(u2);
-			}
-		}
-		return userList;
-	}
 
 	/**
 	 * 取得所有聊天用户
@@ -374,10 +357,7 @@ public class ImController extends BaseController {
 					//查询所有在线用户  修改在线状态
 					Session[] sessions = sessionManagerImpl.getSessions();
 					for (ImFriendUserInfoData userBean : listUser) {
-						String avatar = userBean.getAvatar();
-						String hostAddress = ImUtils.getHostAddress();
-						String serverPort = ImUtils.getServerPort(false);
-						String fileUrl = "http://"+ hostAddress+":"+serverPort + "/"+avatar;
+						String fileUrl = getAvatraFullPath(userBean.getAvatar());
 						userBean.setAvatar(fileUrl);
 						for (int i = 0; i < sessions.length; i++) {
 							if(userBean.getId().equals(sessions[i].getAccount())) {
@@ -403,6 +383,13 @@ public class ImController extends BaseController {
 		} else {
 			return null;
 		}
+	}
+
+	private String getAvatraFullPath(String avatar2) throws Exception {
+		String avatar = avatar2;
+		String hostAddress = ImUtils.getHostAddress();
+		String serverPort = ImUtils.getServerPort(false);
+		return "http://" + hostAddress + ":" + serverPort + "/" + avatar;
 	}
 
 	/**
@@ -460,14 +447,19 @@ public class ImController extends BaseController {
 		
 		UserAccountEntity u = userAccountServiceImpl.getLoginUser(userId);
 		String uid = u.getId();
-		String path = request.getSession().getServletContext().getRealPath("upload/file/temp/");
+		//String path = request.getSession().getServletContext().getRealPath("upload/file/temp/");
+		Resource resource = new ClassPathResource("/resource.properties");
+		Properties props = PropertiesLoaderUtils.loadProperties(resource);
+		String path = (String) props.get("uploadpath");
+
 		String files = filesInfoServiceImpl.saveFiles(file, uid.toString() + UUID.randomUUID().toString(), path);
 		Map<String, Object> map = new HashMap<String, Object>();
 		Map<String, String> submap = new HashMap<String, String>();
 		if (files.length() > 0) {
 			map.put("code", "0");
 			map.put("msg", "上传过成功");
-			submap.put("src", request.getContextPath() + "/upload/file/temp/" + files + "?" + new Date().getTime());
+			//submap.put("src", request.getContextPath() + "/upload/file/temp/" + files + "?" + new Date().getTime());
+			submap.put("src", files + "?" + new Date().getTime());
 			submap.put("name", file.getOriginalFilename());
 		} else {
 			submap.put("src", "");
@@ -609,19 +601,17 @@ public class ImController extends BaseController {
 	@ResponseBody
 	@RequestMapping(value = "/getGroupUser")
 	public ImUserData getGroupUser(HttpServletResponse response, HttpServletRequest request,String id) throws Exception {
-		response.setContentType("application/json; charset=UTF-8");
-		
 		//Map<String, Object> data = new HashMap<>();
+		ImGroupUserListData groupUserListData = new ImGroupUserListData();
         final ImGroupUserData groupById = userDepartmentServiceImpl.findGroupById(id);
-        ImFriendUserData imFriendUserData = new ImFriendUserData();
-		imFriendUserData.setId(id);
-		List<ImFriendUserInfoData> list = userAccountServiceImpl.getGroupUser(imFriendUserData);
+        if(groupById != null){
+			ImFriendUserData imFriendUserData = new ImFriendUserData();
+			imFriendUserData.setId(id);
+			List<ImFriendUserInfoData> list = userAccountServiceImpl.getGroupUser(imFriendUserData);
+			BeanUtils.copyProperties(groupById,groupUserListData);
+			groupUserListData.setList(list);
+		}
 
-        ImGroupUserListData groupUserListData = new ImGroupUserListData();
-        BeanUtils.copyProperties(groupById,groupUserListData);
-        groupUserListData.setList(list);
-
-		/*data.put("list", list);*/
 		ImUserData us = new ImUserData();
 		us.setCode("0");
 		us.setMsg("");

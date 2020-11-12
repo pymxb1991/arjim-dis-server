@@ -5,6 +5,7 @@ package com.arjim.server.redis;
  *@author: maoxb
  *@create: 2020-10-30 10:40
  */
+import com.arjim.constant.Constants;
 import com.arjim.webserver.user.service.UserAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.Message;
@@ -35,7 +36,7 @@ public class RedisKeyExpirationListener extends KeyExpirationEventMessageListene
 
         // 获取到用户失效的 key，进行离线操作
         String expiredKey = message.toString();
-        if(expiredKey.startsWith("USER-ONLINE-FLAG")){
+        if(expiredKey.startsWith(Constants.USER_ONLINE_STATUS_KEY)){
             //TODO  进行设置用户离线操作
             String userId = expiredKey.split(":")[1];
             userAccountService.removeLoginUser(userId);

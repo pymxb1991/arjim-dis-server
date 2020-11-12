@@ -84,8 +84,9 @@ public class ImController extends BaseController {
 		UserAccountEntity userAccount = userAccountServiceImpl.validateUser(query);
 		if (userAccount != null) {
 			userAccountServiceImpl.addLoginUser(userAccount);
-			String json = userAccount.getAccount()+":login arjim-dis-server";
-			redisDao.set("USER-ONLINE-FLAG:"+userAccount.getId(), json,60);
+			String k = Constants.USER_ONLINE_STATUS_KEY+userAccount.getId();
+			String v = userAccount.getAccount()+":login arjim-dis-server";
+			redisDao.set(k, v,60);
 		}
 		ImUserData us = new ImUserData();
 		us.setCode("0");

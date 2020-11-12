@@ -12,6 +12,7 @@ import io.netty.util.AttributeKey;
 
 public class Constants {
 
+	public static String USER_ONLINE_STATUS_KEY="USER-ONLINE-FLAG:";
 	public static interface WebSite {
 		public static final int SUCCESS = 0;
 		public static final int ERROR = -1;

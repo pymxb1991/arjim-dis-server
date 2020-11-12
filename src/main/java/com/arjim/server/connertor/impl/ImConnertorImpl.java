@@ -53,8 +53,9 @@ public class ImConnertorImpl implements ImConnertor {
 		// 设置心跳响应时间
 		hander.channel().attr(Constants.SessionConfig.SERVER_SESSION_HEARBEAT).set(System.currentTimeMillis());
 		final UserAccountEntity userAccountEntity = userAccountServiceImpl.selectById(wrapper.getSessionId());
-		String json = userAccountEntity.getAccount()+":login arjim-dis-server";
-		redisDao.set("USER-ONLINE-FLAG:"+wrapper.getSessionId(), json,60);
+		String k = Constants.USER_ONLINE_STATUS_KEY+wrapper.getSessionId();
+		String v = userAccountEntity.getAccount()+": heartbeat";
+		redisDao.set(k, v,60);
 	}
 
 	@Override
@@ -148,7 +149,8 @@ public class ImConnertorImpl implements ImConnertor {
 				sessionManager.removeSession(sessionId, nid);
 				ImChannelGroup.remove(hander.channel());
 				log.info("connector close sessionId -> " + sessionId + " success ");
-				redisDao.del("USER-ONLINE-FLAG:"+sessionId);
+				String k = Constants.USER_ONLINE_STATUS_KEY+sessionId;
+				redisDao.del(k);
 			}
 		} catch (Exception e) {
 			log.error("connector close sessionId -->" + sessionId + "  Exception.", e);

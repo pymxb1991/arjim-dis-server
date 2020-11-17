@@ -16,6 +16,7 @@ import com.arjim.webserver.dwrmanage.connertor.DwrConnertor;
 import com.arjim.webserver.sys.service.FilesInfoService;
 import com.arjim.webserver.user.model.*;
 import com.arjim.webserver.user.service.*;
+import com.arjim.webserver.util.Pager;
 import com.arjim.webserver.util.Query;
 import groovy.util.logging.Slf4j;
 import io.swagger.annotations.ApiOperation;
@@ -597,8 +598,6 @@ public class ImController extends BaseController {
 		userDepartmentServiceImpl.updateSign(imFriendUserInfo);
 	}
 
-
-
 	@ResponseBody
 	@RequestMapping(value = "/getGroupUser")
 	public ImUserData getGroupUser(HttpServletResponse response, HttpServletRequest request,String id) throws Exception {
@@ -617,6 +616,34 @@ public class ImController extends BaseController {
 		us.setCode("0");
 		us.setMsg("");
 		us.setData(groupUserListData);
+		return us;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "userHistoryMessagesPage")
+	public ImUserData userHistoryMessagesPage(HttpServletRequest request, HttpServletResponse response, ImParamData paramData) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("senduser", paramData.getUserId());
+		map.put("receiveuser", paramData.getId());
+		String type = paramData.getType();
+		int totalsize = 0;
+		if ("group".equals(type)) {
+			totalsize = userMessageServiceImpl.getGroupHistoryMessageCount(map);
+		} else {
+			totalsize = userMessageServiceImpl.getHistoryMessageCount(map);
+		}
+		Map<String, Object> resultMap = new HashMap<>();
+		resultMap.put("skipToPage", getSkipToPage());
+		resultMap.put("pageSize", getPageSize());
+		resultMap.put("totalsize", totalsize);
+
+		Pager pager = new Pager(Integer.valueOf(paramData.getSkipToPage()),
+				getPageSize(),
+				totalsize);
+		ImUserData us = new ImUserData();
+		us.setCode("0");
+		us.setMsg("");
+		us.setData(pager);
 		return us;
 	}
 }

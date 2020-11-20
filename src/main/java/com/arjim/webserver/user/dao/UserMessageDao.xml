@@ -65,7 +65,8 @@
 		a.content,
 		a.createuser,
 		a.createdate,
-		a.updatedate
+		a.updatedate,
+		a.groupid
 		FROM user_message a
 		LEFT JOIN sys_user b ON b.id=a.senduser
 		where a.groupid = #{groupid}

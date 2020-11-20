@@ -67,4 +67,6 @@ public interface UserMessageService {
 	 * @return
 	 */
 	int getGroupHistoryMessageCount(Map<String, Object> map);
+
+	List<UserMessageEntity> getGroupOfflinemsg(Map<String, Object> map);
 }

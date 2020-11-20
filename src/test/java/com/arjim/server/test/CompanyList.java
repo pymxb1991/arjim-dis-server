@@ -1,7 +1,5 @@
 package com.arjim.server.test;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 import org.apache.http.*;
 
 import org.apache.http.Header;
@@ -69,14 +67,6 @@ public class CompanyList {
 
         /* 5.对返回的信息进行json解析*/
 
-        Result result = com.alibaba.fastjson.JSONObject.parseObject(e, Result.class);//将bean和json中的key一一对应
-        JSONObject jsonObject = JSONObject.fromObject(e);//一层层剥离，首先是将jsonstring转化为json对象
-        String a = jsonObject.getString("data");//提取出json对象的key：data的值，为json字符串
-        JSONObject jsonObject1 = JSONObject.fromObject(a);//将data的值，json字符串转化为json对象
-        JSONArray array = jsonObject1.getJSONObject("page").getJSONArray("data");//获取company对象个数
-        for (int i = 0; i < array.size(); i++) {
-            System.out.println("公司列表为：" + result.data.page.data.get(i).company.name);//for循环输出company的name值，ok！！！！！
-        }
 
     }
 }

@@ -1,5 +1,6 @@
 package com.arjim.webserver.user.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -65,6 +66,23 @@ public class UserMessageServiceImpl implements UserMessageService {
 		List<UserMessageEntity> result = userMessageDao.getOfflineMessageList(map);
 		// 更新状态为已读状态
 		userMessageDao.updatemsgstate(map);
+		return result;
+	}
+
+	@Override
+	public List<UserMessageEntity> getGroupOfflinemsg(Map<String, Object> map) {
+		List<String> groupIds = userMessageDao.selectUserGroups(map);
+		List<UserMessageEntity> result = new ArrayList<>();
+		if(groupIds != null && groupIds.size()> 0) {
+			for (String groupId : groupIds){
+				map.put("groupid", groupId);
+				map.put("isread", 0);
+				List<UserMessageEntity> groupHistoryMessageList = userMessageDao.getGroupHistoryMessageList(map);
+				if(groupHistoryMessageList!= null && groupHistoryMessageList.size()> 0)
+					result.addAll(groupHistoryMessageList);
+			}
+
+		}
 		return result;
 	}
 

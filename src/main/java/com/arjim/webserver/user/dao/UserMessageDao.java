@@ -62,4 +62,5 @@ public interface UserMessageDao extends BaseDao<UserMessageEntity> {
 	 */
 	int updatemsgstate(Map<String, Object> map);
 
+    List<String> selectUserGroups(Map<String, Object> map);
 }

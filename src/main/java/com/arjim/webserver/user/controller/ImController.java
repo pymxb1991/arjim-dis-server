@@ -18,8 +18,6 @@ import com.arjim.webserver.user.model.*;
 import com.arjim.webserver.user.service.*;
 import com.arjim.webserver.util.Pager;
 import com.arjim.webserver.util.Query;
-import groovy.util.logging.Slf4j;
-import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -40,7 +38,6 @@ import java.util.stream.Collectors;
 
 @CrossOrigin
 @Controller
-@Slf4j
 public class ImController extends BaseController {
 
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -186,7 +183,6 @@ public class ImController extends BaseController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/leaveGroup", method = RequestMethod.POST)
-	@ApiOperation(value = " 退出群组")
 	public ImUserData leaveGroup(@RequestParam  String userId, @RequestParam String groupId, HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		ImUserData us = new ImUserData();
 		if (StringUtils.isEmpty(userId)) {
@@ -494,6 +490,34 @@ public class ImController extends BaseController {
 		if (loginUser!= null) {
 			map.put("receiveuser", userId);
 			List<UserMessageEntity> list = userMessageServiceImpl.getOfflineMessageList(map);
+			us.setData(list);
+			return JSONArray.toJSON(list);
+		} else {
+			return JSONArray.toJSON(new ArrayList<UserMessageEntity>());
+		}
+
+	}/**
+	 * 取得组离线消息
+	 *
+	 * @param response
+	 * @param request
+	 * @param userId
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/getGroupOfflinemsg", produces = "text/html;charset=UTF-8", method = RequestMethod.POST)
+	@ResponseBody
+	public Object getGroupOfflinemsg(HttpServletResponse response, HttpServletRequest request, String userId) throws Exception {
+		response.setContentType("application/json; charset=UTF-8");
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		ImUserData us = new ImUserData();
+		us.setCode("200");
+		us.setMsg("成功");
+		final UserAccountEntity loginUser = userAccountServiceImpl.getLoginUser(userId);
+		if (loginUser!= null) {
+			map.put("receiveuser", userId);
+			List<UserMessageEntity> list = userMessageServiceImpl.getGroupOfflinemsg(map);
 			us.setData(list);
 			return JSONArray.toJSON(list);
 		} else {

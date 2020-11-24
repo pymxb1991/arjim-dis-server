@@ -303,6 +303,7 @@ public class ImController extends BaseController {
 		}
 		us.setCode("200");
 		us.setMsg("群组创建，人员添加成功");
+		us.setData(userGroupEntity);
 		return us;
 	}
 
@@ -360,14 +361,17 @@ public class ImController extends BaseController {
 						for (int i = 0; i < sessions.length; i++) {
 							if(userBean.getId().equals(sessions[i].getAccount())) {
 								userBean.setStatus("online");
+								userBean.setStatusNo(0);
 								break;
 							}
 						}
 						if(userBean.getId().equals(userId)) {
 							userBean.setStatus("online");
+							userBean.setStatusNo(0);
 						}
 					}
-					ImFriendUserData imFriendUserData = new ImFriendUserData(groupBean.getId(), groupBean.getGroupname(), listUser);
+					List<ImFriendUserInfoData> userList = listUser.stream().sorted(Comparator.comparing(ImFriendUserInfoData::getStatusNo)).collect(Collectors.toList());
+					ImFriendUserData imFriendUserData = new ImFriendUserData(groupBean.getId(), groupBean.getGroupname(), userList);
 					friends.add(imFriendUserData);
 				}
 			}

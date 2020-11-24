@@ -25,7 +25,7 @@ public final class MessageProto {
      *
      * <code>string version = 1;</code>
      */
-    String getVersion();
+    java.lang.String getVersion();
     /**
      * <pre>
      *接口版本号
@@ -43,7 +43,7 @@ public final class MessageProto {
      *
      * <code>string deviceId = 2;</code>
      */
-    String getDeviceId();
+    java.lang.String getDeviceId();
     /**
      * <pre>
      *设备uuid
@@ -70,7 +70,7 @@ public final class MessageProto {
      *
      * <code>string sender = 4;</code>
      */
-    String getSender();
+    java.lang.String getSender();
     /**
      * <pre>
      *发送人
@@ -88,7 +88,7 @@ public final class MessageProto {
      *
      * <code>string receiver = 5;</code>
      */
-    String getReceiver();
+    java.lang.String getReceiver();
     /**
      * <pre>
      *接收人
@@ -106,7 +106,7 @@ public final class MessageProto {
      *
      * <code>string groupId = 6;</code>
      */
-    String getGroupId();
+    java.lang.String getGroupId();
     /**
      * <pre>
      *用户组编号
@@ -142,7 +142,7 @@ public final class MessageProto {
      *
      * <code>string platform = 9;</code>
      */
-    String getPlatform();
+    java.lang.String getPlatform();
     /**
      * <pre>
      *mobile-ios mobile-android pc-windows pc-mac
@@ -160,7 +160,7 @@ public final class MessageProto {
      *
      * <code>string platformVersion = 10;</code>
      */
-    String getPlatformVersion();
+    java.lang.String getPlatformVersion();
     /**
      * <pre>
      *客户端版本号
@@ -178,7 +178,7 @@ public final class MessageProto {
      *
      * <code>string token = 11;</code>
      */
-    String getToken();
+    java.lang.String getToken();
     /**
      * <pre>
      *客户端凭证
@@ -196,7 +196,7 @@ public final class MessageProto {
      *
      * <code>string appKey = 12;</code>
      */
-    String getAppKey();
+    java.lang.String getAppKey();
     /**
      * <pre>
      *客户端key
@@ -214,7 +214,7 @@ public final class MessageProto {
      *
      * <code>string timeStamp = 13;</code>
      */
-    String getTimeStamp();
+    java.lang.String getTimeStamp();
     /**
      * <pre>
      *时间戳
@@ -232,7 +232,7 @@ public final class MessageProto {
      *
      * <code>string sign = 14;</code>
      */
-    String getSign();
+    java.lang.String getSign();
     /**
      * <pre>
      *签名 
@@ -259,7 +259,7 @@ public final class MessageProto {
      *
      * <code>string resSign = 16;</code>
      */
-    String getResSign();
+    java.lang.String getResSign();
     /**
      * <pre>
      *响应标志位： agree 同意  refuse 拒绝
@@ -277,7 +277,7 @@ public final class MessageProto {
      *
      * <code>string reqType = 17;</code>
      */
-    String getReqType();
+    java.lang.String getReqType();
     /**
      * <pre>
      *请求方式 ptop 单聊  group 多聊
@@ -295,7 +295,7 @@ public final class MessageProto {
      *
      * <code>string vagroupId = 18;</code>
      */
-    String getVagroupId();
+    java.lang.String getVagroupId();
     /**
      * <pre>
      *视频语音群组ID，房间号	 
@@ -313,7 +313,7 @@ public final class MessageProto {
      *
      * <code>string callType = 19;</code>
      */
-    String getCallType();
+    java.lang.String getCallType();
     /**
      * <pre>
      *呼叫方式 发起者/接收者  caller/callee 
@@ -331,7 +331,7 @@ public final class MessageProto {
      *
      * <code>string senderName = 20;</code>
      */
-    String getSenderName();
+    java.lang.String getSenderName();
     /**
      * <pre>
      *发送人姓名
@@ -349,7 +349,7 @@ public final class MessageProto {
      *
      * <code>string senderPhoto = 21;</code>
      */
-    String getSenderPhoto();
+    java.lang.String getSenderPhoto();
     /**
      * <pre>
      *发送人头像
@@ -367,7 +367,7 @@ public final class MessageProto {
      *
      * <code>string vagroupName = 22;</code>
      */
-    String getVagroupName();
+    java.lang.String getVagroupName();
     /**
      * <pre>
      *视频语音群组名称，房间名称
@@ -380,21 +380,39 @@ public final class MessageProto {
 
     /**
      * <pre>
-     *&#47;/视频，或语音类型
+     *&#47;/视频，或语音类型	 
      * </pre>
      *
      * <code>string vaType = 23;</code>
      */
-    String getVaType();
+    java.lang.String getVaType();
     /**
      * <pre>
-     *&#47;/视频，或语音类型
+     *&#47;/视频，或语音类型	 
      * </pre>
      *
      * <code>string vaType = 23;</code>
      */
     com.google.protobuf.ByteString
         getVaTypeBytes();
+
+    /**
+     * <pre>
+     *是否创建新的群组 true:是 flase:否
+     * </pre>
+     *
+     * <code>string addGroupFlag = 24;</code>
+     */
+    java.lang.String getAddGroupFlag();
+    /**
+     * <pre>
+     *是否创建新的群组 true:是 flase:否
+     * </pre>
+     *
+     * <code>string addGroupFlag = 24;</code>
+     */
+    com.google.protobuf.ByteString
+        getAddGroupFlagBytes();
   }
   /**
    * Protobuf type {@code com.arjim.server.model.proto.Model}
@@ -432,9 +450,10 @@ public final class MessageProto {
       senderPhoto_ = "";
       vagroupName_ = "";
       vaType_ = "";
+      addGroupFlag_ = "";
     }
 
-    @Override
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return this.unknownFields;
@@ -463,13 +482,13 @@ public final class MessageProto {
               break;
             }
             case 10: {
-              String s = input.readStringRequireUtf8();
+              java.lang.String s = input.readStringRequireUtf8();
 
               version_ = s;
               break;
             }
             case 18: {
-              String s = input.readStringRequireUtf8();
+              java.lang.String s = input.readStringRequireUtf8();
 
               deviceId_ = s;
               break;
@@ -480,19 +499,19 @@ public final class MessageProto {
               break;
             }
             case 34: {
-              String s = input.readStringRequireUtf8();
+              java.lang.String s = input.readStringRequireUtf8();
 
               sender_ = s;
               break;
             }
             case 42: {
-              String s = input.readStringRequireUtf8();
+              java.lang.String s = input.readStringRequireUtf8();
 
               receiver_ = s;
               break;
             }
             case 50: {
-              String s = input.readStringRequireUtf8();
+              java.lang.String s = input.readStringRequireUtf8();
 
               groupId_ = s;
               break;
@@ -508,37 +527,37 @@ public final class MessageProto {
               break;
             }
             case 74: {
-              String s = input.readStringRequireUtf8();
+              java.lang.String s = input.readStringRequireUtf8();
 
               platform_ = s;
               break;
             }
             case 82: {
-              String s = input.readStringRequireUtf8();
+              java.lang.String s = input.readStringRequireUtf8();
 
               platformVersion_ = s;
               break;
             }
             case 90: {
-              String s = input.readStringRequireUtf8();
+              java.lang.String s = input.readStringRequireUtf8();
 
               token_ = s;
               break;
             }
             case 98: {
-              String s = input.readStringRequireUtf8();
+              java.lang.String s = input.readStringRequireUtf8();
 
               appKey_ = s;
               break;
             }
             case 106: {
-              String s = input.readStringRequireUtf8();
+              java.lang.String s = input.readStringRequireUtf8();
 
               timeStamp_ = s;
               break;
             }
             case 114: {
-              String s = input.readStringRequireUtf8();
+              java.lang.String s = input.readStringRequireUtf8();
 
               sign_ = s;
               break;
@@ -549,51 +568,57 @@ public final class MessageProto {
               break;
             }
             case 130: {
-              String s = input.readStringRequireUtf8();
+              java.lang.String s = input.readStringRequireUtf8();
 
               resSign_ = s;
               break;
             }
             case 138: {
-              String s = input.readStringRequireUtf8();
+              java.lang.String s = input.readStringRequireUtf8();
 
               reqType_ = s;
               break;
             }
             case 146: {
-              String s = input.readStringRequireUtf8();
+              java.lang.String s = input.readStringRequireUtf8();
 
               vagroupId_ = s;
               break;
             }
             case 154: {
-              String s = input.readStringRequireUtf8();
+              java.lang.String s = input.readStringRequireUtf8();
 
               callType_ = s;
               break;
             }
             case 162: {
-              String s = input.readStringRequireUtf8();
+              java.lang.String s = input.readStringRequireUtf8();
 
               senderName_ = s;
               break;
             }
             case 170: {
-              String s = input.readStringRequireUtf8();
+              java.lang.String s = input.readStringRequireUtf8();
 
               senderPhoto_ = s;
               break;
             }
             case 178: {
-              String s = input.readStringRequireUtf8();
+              java.lang.String s = input.readStringRequireUtf8();
 
               vagroupName_ = s;
               break;
             }
             case 186: {
-              String s = input.readStringRequireUtf8();
+              java.lang.String s = input.readStringRequireUtf8();
 
               vaType_ = s;
+              break;
+            }
+            case 194: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              addGroupFlag_ = s;
               break;
             }
           }
@@ -610,18 +635,18 @@ public final class MessageProto {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return MessageProto.internal_static_com_arjim_server_model_proto_Model_descriptor;
+      return com.arjim.server.model.proto.MessageProto.internal_static_com_arjim_server_model_proto_Model_descriptor;
     }
 
-    protected FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return MessageProto.internal_static_com_arjim_server_model_proto_Model_fieldAccessorTable
+      return com.arjim.server.model.proto.MessageProto.internal_static_com_arjim_server_model_proto_Model_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              Model.class, Builder.class);
+              com.arjim.server.model.proto.MessageProto.Model.class, com.arjim.server.model.proto.MessageProto.Model.Builder.class);
     }
 
     public static final int VERSION_FIELD_NUMBER = 1;
-    private volatile Object version_;
+    private volatile java.lang.Object version_;
     /**
      * <pre>
      *接口版本号
@@ -629,14 +654,14 @@ public final class MessageProto {
      *
      * <code>string version = 1;</code>
      */
-    public String getVersion() {
-      Object ref = version_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getVersion() {
+      java.lang.Object ref = version_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        java.lang.String s = bs.toStringUtf8();
         version_ = s;
         return s;
       }
@@ -650,11 +675,11 @@ public final class MessageProto {
      */
     public com.google.protobuf.ByteString
         getVersionBytes() {
-      Object ref = version_;
-      if (ref instanceof String) {
+      java.lang.Object ref = version_;
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+                (java.lang.String) ref);
         version_ = b;
         return b;
       } else {
@@ -663,7 +688,7 @@ public final class MessageProto {
     }
 
     public static final int DEVICEID_FIELD_NUMBER = 2;
-    private volatile Object deviceId_;
+    private volatile java.lang.Object deviceId_;
     /**
      * <pre>
      *设备uuid
@@ -671,14 +696,14 @@ public final class MessageProto {
      *
      * <code>string deviceId = 2;</code>
      */
-    public String getDeviceId() {
-      Object ref = deviceId_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getDeviceId() {
+      java.lang.Object ref = deviceId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        java.lang.String s = bs.toStringUtf8();
         deviceId_ = s;
         return s;
       }
@@ -692,11 +717,11 @@ public final class MessageProto {
      */
     public com.google.protobuf.ByteString
         getDeviceIdBytes() {
-      Object ref = deviceId_;
-      if (ref instanceof String) {
+      java.lang.Object ref = deviceId_;
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+                (java.lang.String) ref);
         deviceId_ = b;
         return b;
       } else {
@@ -718,7 +743,7 @@ public final class MessageProto {
     }
 
     public static final int SENDER_FIELD_NUMBER = 4;
-    private volatile Object sender_;
+    private volatile java.lang.Object sender_;
     /**
      * <pre>
      *发送人
@@ -726,14 +751,14 @@ public final class MessageProto {
      *
      * <code>string sender = 4;</code>
      */
-    public String getSender() {
-      Object ref = sender_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getSender() {
+      java.lang.Object ref = sender_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        java.lang.String s = bs.toStringUtf8();
         sender_ = s;
         return s;
       }
@@ -747,11 +772,11 @@ public final class MessageProto {
      */
     public com.google.protobuf.ByteString
         getSenderBytes() {
-      Object ref = sender_;
-      if (ref instanceof String) {
+      java.lang.Object ref = sender_;
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+                (java.lang.String) ref);
         sender_ = b;
         return b;
       } else {
@@ -760,7 +785,7 @@ public final class MessageProto {
     }
 
     public static final int RECEIVER_FIELD_NUMBER = 5;
-    private volatile Object receiver_;
+    private volatile java.lang.Object receiver_;
     /**
      * <pre>
      *接收人
@@ -768,14 +793,14 @@ public final class MessageProto {
      *
      * <code>string receiver = 5;</code>
      */
-    public String getReceiver() {
-      Object ref = receiver_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getReceiver() {
+      java.lang.Object ref = receiver_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        java.lang.String s = bs.toStringUtf8();
         receiver_ = s;
         return s;
       }
@@ -789,11 +814,11 @@ public final class MessageProto {
      */
     public com.google.protobuf.ByteString
         getReceiverBytes() {
-      Object ref = receiver_;
-      if (ref instanceof String) {
+      java.lang.Object ref = receiver_;
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+                (java.lang.String) ref);
         receiver_ = b;
         return b;
       } else {
@@ -802,7 +827,7 @@ public final class MessageProto {
     }
 
     public static final int GROUPID_FIELD_NUMBER = 6;
-    private volatile Object groupId_;
+    private volatile java.lang.Object groupId_;
     /**
      * <pre>
      *用户组编号
@@ -810,14 +835,14 @@ public final class MessageProto {
      *
      * <code>string groupId = 6;</code>
      */
-    public String getGroupId() {
-      Object ref = groupId_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getGroupId() {
+      java.lang.Object ref = groupId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        java.lang.String s = bs.toStringUtf8();
         groupId_ = s;
         return s;
       }
@@ -831,11 +856,11 @@ public final class MessageProto {
      */
     public com.google.protobuf.ByteString
         getGroupIdBytes() {
-      Object ref = groupId_;
-      if (ref instanceof String) {
+      java.lang.Object ref = groupId_;
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+                (java.lang.String) ref);
         groupId_ = b;
         return b;
       } else {
@@ -870,7 +895,7 @@ public final class MessageProto {
     }
 
     public static final int PLATFORM_FIELD_NUMBER = 9;
-    private volatile Object platform_;
+    private volatile java.lang.Object platform_;
     /**
      * <pre>
      *mobile-ios mobile-android pc-windows pc-mac
@@ -878,14 +903,14 @@ public final class MessageProto {
      *
      * <code>string platform = 9;</code>
      */
-    public String getPlatform() {
-      Object ref = platform_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getPlatform() {
+      java.lang.Object ref = platform_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        java.lang.String s = bs.toStringUtf8();
         platform_ = s;
         return s;
       }
@@ -899,11 +924,11 @@ public final class MessageProto {
      */
     public com.google.protobuf.ByteString
         getPlatformBytes() {
-      Object ref = platform_;
-      if (ref instanceof String) {
+      java.lang.Object ref = platform_;
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+                (java.lang.String) ref);
         platform_ = b;
         return b;
       } else {
@@ -912,7 +937,7 @@ public final class MessageProto {
     }
 
     public static final int PLATFORMVERSION_FIELD_NUMBER = 10;
-    private volatile Object platformVersion_;
+    private volatile java.lang.Object platformVersion_;
     /**
      * <pre>
      *客户端版本号
@@ -920,14 +945,14 @@ public final class MessageProto {
      *
      * <code>string platformVersion = 10;</code>
      */
-    public String getPlatformVersion() {
-      Object ref = platformVersion_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getPlatformVersion() {
+      java.lang.Object ref = platformVersion_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        java.lang.String s = bs.toStringUtf8();
         platformVersion_ = s;
         return s;
       }
@@ -941,11 +966,11 @@ public final class MessageProto {
      */
     public com.google.protobuf.ByteString
         getPlatformVersionBytes() {
-      Object ref = platformVersion_;
-      if (ref instanceof String) {
+      java.lang.Object ref = platformVersion_;
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+                (java.lang.String) ref);
         platformVersion_ = b;
         return b;
       } else {
@@ -954,7 +979,7 @@ public final class MessageProto {
     }
 
     public static final int TOKEN_FIELD_NUMBER = 11;
-    private volatile Object token_;
+    private volatile java.lang.Object token_;
     /**
      * <pre>
      *客户端凭证
@@ -962,14 +987,14 @@ public final class MessageProto {
      *
      * <code>string token = 11;</code>
      */
-    public String getToken() {
-      Object ref = token_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getToken() {
+      java.lang.Object ref = token_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        java.lang.String s = bs.toStringUtf8();
         token_ = s;
         return s;
       }
@@ -983,11 +1008,11 @@ public final class MessageProto {
      */
     public com.google.protobuf.ByteString
         getTokenBytes() {
-      Object ref = token_;
-      if (ref instanceof String) {
+      java.lang.Object ref = token_;
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+                (java.lang.String) ref);
         token_ = b;
         return b;
       } else {
@@ -996,7 +1021,7 @@ public final class MessageProto {
     }
 
     public static final int APPKEY_FIELD_NUMBER = 12;
-    private volatile Object appKey_;
+    private volatile java.lang.Object appKey_;
     /**
      * <pre>
      *客户端key
@@ -1004,14 +1029,14 @@ public final class MessageProto {
      *
      * <code>string appKey = 12;</code>
      */
-    public String getAppKey() {
-      Object ref = appKey_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getAppKey() {
+      java.lang.Object ref = appKey_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        java.lang.String s = bs.toStringUtf8();
         appKey_ = s;
         return s;
       }
@@ -1025,11 +1050,11 @@ public final class MessageProto {
      */
     public com.google.protobuf.ByteString
         getAppKeyBytes() {
-      Object ref = appKey_;
-      if (ref instanceof String) {
+      java.lang.Object ref = appKey_;
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+                (java.lang.String) ref);
         appKey_ = b;
         return b;
       } else {
@@ -1038,7 +1063,7 @@ public final class MessageProto {
     }
 
     public static final int TIMESTAMP_FIELD_NUMBER = 13;
-    private volatile Object timeStamp_;
+    private volatile java.lang.Object timeStamp_;
     /**
      * <pre>
      *时间戳
@@ -1046,14 +1071,14 @@ public final class MessageProto {
      *
      * <code>string timeStamp = 13;</code>
      */
-    public String getTimeStamp() {
-      Object ref = timeStamp_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getTimeStamp() {
+      java.lang.Object ref = timeStamp_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        java.lang.String s = bs.toStringUtf8();
         timeStamp_ = s;
         return s;
       }
@@ -1067,11 +1092,11 @@ public final class MessageProto {
      */
     public com.google.protobuf.ByteString
         getTimeStampBytes() {
-      Object ref = timeStamp_;
-      if (ref instanceof String) {
+      java.lang.Object ref = timeStamp_;
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+                (java.lang.String) ref);
         timeStamp_ = b;
         return b;
       } else {
@@ -1080,7 +1105,7 @@ public final class MessageProto {
     }
 
     public static final int SIGN_FIELD_NUMBER = 14;
-    private volatile Object sign_;
+    private volatile java.lang.Object sign_;
     /**
      * <pre>
      *签名 
@@ -1088,14 +1113,14 @@ public final class MessageProto {
      *
      * <code>string sign = 14;</code>
      */
-    public String getSign() {
-      Object ref = sign_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getSign() {
+      java.lang.Object ref = sign_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        java.lang.String s = bs.toStringUtf8();
         sign_ = s;
         return s;
       }
@@ -1109,11 +1134,11 @@ public final class MessageProto {
      */
     public com.google.protobuf.ByteString
         getSignBytes() {
-      Object ref = sign_;
-      if (ref instanceof String) {
+      java.lang.Object ref = sign_;
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+                (java.lang.String) ref);
         sign_ = b;
         return b;
       } else {
@@ -1135,7 +1160,7 @@ public final class MessageProto {
     }
 
     public static final int RESSIGN_FIELD_NUMBER = 16;
-    private volatile Object resSign_;
+    private volatile java.lang.Object resSign_;
     /**
      * <pre>
      *响应标志位： agree 同意  refuse 拒绝
@@ -1143,14 +1168,14 @@ public final class MessageProto {
      *
      * <code>string resSign = 16;</code>
      */
-    public String getResSign() {
-      Object ref = resSign_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getResSign() {
+      java.lang.Object ref = resSign_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        java.lang.String s = bs.toStringUtf8();
         resSign_ = s;
         return s;
       }
@@ -1164,11 +1189,11 @@ public final class MessageProto {
      */
     public com.google.protobuf.ByteString
         getResSignBytes() {
-      Object ref = resSign_;
-      if (ref instanceof String) {
+      java.lang.Object ref = resSign_;
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+                (java.lang.String) ref);
         resSign_ = b;
         return b;
       } else {
@@ -1177,7 +1202,7 @@ public final class MessageProto {
     }
 
     public static final int REQTYPE_FIELD_NUMBER = 17;
-    private volatile Object reqType_;
+    private volatile java.lang.Object reqType_;
     /**
      * <pre>
      *请求方式 ptop 单聊  group 多聊
@@ -1185,14 +1210,14 @@ public final class MessageProto {
      *
      * <code>string reqType = 17;</code>
      */
-    public String getReqType() {
-      Object ref = reqType_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getReqType() {
+      java.lang.Object ref = reqType_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        java.lang.String s = bs.toStringUtf8();
         reqType_ = s;
         return s;
       }
@@ -1206,11 +1231,11 @@ public final class MessageProto {
      */
     public com.google.protobuf.ByteString
         getReqTypeBytes() {
-      Object ref = reqType_;
-      if (ref instanceof String) {
+      java.lang.Object ref = reqType_;
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+                (java.lang.String) ref);
         reqType_ = b;
         return b;
       } else {
@@ -1219,7 +1244,7 @@ public final class MessageProto {
     }
 
     public static final int VAGROUPID_FIELD_NUMBER = 18;
-    private volatile Object vagroupId_;
+    private volatile java.lang.Object vagroupId_;
     /**
      * <pre>
      *视频语音群组ID，房间号	 
@@ -1227,14 +1252,14 @@ public final class MessageProto {
      *
      * <code>string vagroupId = 18;</code>
      */
-    public String getVagroupId() {
-      Object ref = vagroupId_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getVagroupId() {
+      java.lang.Object ref = vagroupId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        java.lang.String s = bs.toStringUtf8();
         vagroupId_ = s;
         return s;
       }
@@ -1248,11 +1273,11 @@ public final class MessageProto {
      */
     public com.google.protobuf.ByteString
         getVagroupIdBytes() {
-      Object ref = vagroupId_;
-      if (ref instanceof String) {
+      java.lang.Object ref = vagroupId_;
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+                (java.lang.String) ref);
         vagroupId_ = b;
         return b;
       } else {
@@ -1261,7 +1286,7 @@ public final class MessageProto {
     }
 
     public static final int CALLTYPE_FIELD_NUMBER = 19;
-    private volatile Object callType_;
+    private volatile java.lang.Object callType_;
     /**
      * <pre>
      *呼叫方式 发起者/接收者  caller/callee 
@@ -1269,14 +1294,14 @@ public final class MessageProto {
      *
      * <code>string callType = 19;</code>
      */
-    public String getCallType() {
-      Object ref = callType_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getCallType() {
+      java.lang.Object ref = callType_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        java.lang.String s = bs.toStringUtf8();
         callType_ = s;
         return s;
       }
@@ -1290,11 +1315,11 @@ public final class MessageProto {
      */
     public com.google.protobuf.ByteString
         getCallTypeBytes() {
-      Object ref = callType_;
-      if (ref instanceof String) {
+      java.lang.Object ref = callType_;
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+                (java.lang.String) ref);
         callType_ = b;
         return b;
       } else {
@@ -1303,7 +1328,7 @@ public final class MessageProto {
     }
 
     public static final int SENDERNAME_FIELD_NUMBER = 20;
-    private volatile Object senderName_;
+    private volatile java.lang.Object senderName_;
     /**
      * <pre>
      *发送人姓名
@@ -1311,14 +1336,14 @@ public final class MessageProto {
      *
      * <code>string senderName = 20;</code>
      */
-    public String getSenderName() {
-      Object ref = senderName_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getSenderName() {
+      java.lang.Object ref = senderName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        java.lang.String s = bs.toStringUtf8();
         senderName_ = s;
         return s;
       }
@@ -1332,11 +1357,11 @@ public final class MessageProto {
      */
     public com.google.protobuf.ByteString
         getSenderNameBytes() {
-      Object ref = senderName_;
-      if (ref instanceof String) {
+      java.lang.Object ref = senderName_;
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+                (java.lang.String) ref);
         senderName_ = b;
         return b;
       } else {
@@ -1345,7 +1370,7 @@ public final class MessageProto {
     }
 
     public static final int SENDERPHOTO_FIELD_NUMBER = 21;
-    private volatile Object senderPhoto_;
+    private volatile java.lang.Object senderPhoto_;
     /**
      * <pre>
      *发送人头像
@@ -1353,14 +1378,14 @@ public final class MessageProto {
      *
      * <code>string senderPhoto = 21;</code>
      */
-    public String getSenderPhoto() {
-      Object ref = senderPhoto_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getSenderPhoto() {
+      java.lang.Object ref = senderPhoto_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        java.lang.String s = bs.toStringUtf8();
         senderPhoto_ = s;
         return s;
       }
@@ -1374,11 +1399,11 @@ public final class MessageProto {
      */
     public com.google.protobuf.ByteString
         getSenderPhotoBytes() {
-      Object ref = senderPhoto_;
-      if (ref instanceof String) {
+      java.lang.Object ref = senderPhoto_;
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+                (java.lang.String) ref);
         senderPhoto_ = b;
         return b;
       } else {
@@ -1387,7 +1412,7 @@ public final class MessageProto {
     }
 
     public static final int VAGROUPNAME_FIELD_NUMBER = 22;
-    private volatile Object vagroupName_;
+    private volatile java.lang.Object vagroupName_;
     /**
      * <pre>
      *视频语音群组名称，房间名称
@@ -1395,14 +1420,14 @@ public final class MessageProto {
      *
      * <code>string vagroupName = 22;</code>
      */
-    public String getVagroupName() {
-      Object ref = vagroupName_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getVagroupName() {
+      java.lang.Object ref = vagroupName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        java.lang.String s = bs.toStringUtf8();
         vagroupName_ = s;
         return s;
       }
@@ -1416,11 +1441,11 @@ public final class MessageProto {
      */
     public com.google.protobuf.ByteString
         getVagroupNameBytes() {
-      Object ref = vagroupName_;
-      if (ref instanceof String) {
+      java.lang.Object ref = vagroupName_;
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+                (java.lang.String) ref);
         vagroupName_ = b;
         return b;
       } else {
@@ -1429,41 +1454,83 @@ public final class MessageProto {
     }
 
     public static final int VATYPE_FIELD_NUMBER = 23;
-    private volatile Object vaType_;
+    private volatile java.lang.Object vaType_;
     /**
      * <pre>
-     *&#47;/视频，或语音类型
+     *&#47;/视频，或语音类型	 
      * </pre>
      *
      * <code>string vaType = 23;</code>
      */
-    public String getVaType() {
-      Object ref = vaType_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getVaType() {
+      java.lang.Object ref = vaType_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        java.lang.String s = bs.toStringUtf8();
         vaType_ = s;
         return s;
       }
     }
     /**
      * <pre>
-     *&#47;/视频，或语音类型
+     *&#47;/视频，或语音类型	 
      * </pre>
      *
      * <code>string vaType = 23;</code>
      */
     public com.google.protobuf.ByteString
         getVaTypeBytes() {
-      Object ref = vaType_;
-      if (ref instanceof String) {
+      java.lang.Object ref = vaType_;
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+                (java.lang.String) ref);
         vaType_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ADDGROUPFLAG_FIELD_NUMBER = 24;
+    private volatile java.lang.Object addGroupFlag_;
+    /**
+     * <pre>
+     *是否创建新的群组 true:是 flase:否
+     * </pre>
+     *
+     * <code>string addGroupFlag = 24;</code>
+     */
+    public java.lang.String getAddGroupFlag() {
+      java.lang.Object ref = addGroupFlag_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        addGroupFlag_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     *是否创建新的群组 true:是 flase:否
+     * </pre>
+     *
+     * <code>string addGroupFlag = 24;</code>
+     */
+    public com.google.protobuf.ByteString
+        getAddGroupFlagBytes() {
+      java.lang.Object ref = addGroupFlag_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        addGroupFlag_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -1551,6 +1618,9 @@ public final class MessageProto {
       if (!getVaTypeBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 23, vaType_);
       }
+      if (!getAddGroupFlagBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 24, addGroupFlag_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -1632,20 +1702,23 @@ public final class MessageProto {
       if (!getVaTypeBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(23, vaType_);
       }
+      if (!getAddGroupFlagBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(24, addGroupFlag_);
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    @Override
-    public boolean equals(final Object obj) {
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof Model)) {
+      if (!(obj instanceof com.arjim.server.model.proto.MessageProto.Model)) {
         return super.equals(obj);
       }
-      Model other = (Model) obj;
+      com.arjim.server.model.proto.MessageProto.Model other = (com.arjim.server.model.proto.MessageProto.Model) obj;
 
       boolean result = true;
       result = result && getVersion()
@@ -1694,11 +1767,13 @@ public final class MessageProto {
           .equals(other.getVagroupName());
       result = result && getVaType()
           .equals(other.getVaType());
+      result = result && getAddGroupFlag()
+          .equals(other.getAddGroupFlag());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
-    @Override
+    @java.lang.Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
         return memoizedHashCode;
@@ -1751,74 +1826,76 @@ public final class MessageProto {
       hash = (53 * hash) + getVagroupName().hashCode();
       hash = (37 * hash) + VATYPE_FIELD_NUMBER;
       hash = (53 * hash) + getVaType().hashCode();
+      hash = (37 * hash) + ADDGROUPFLAG_FIELD_NUMBER;
+      hash = (53 * hash) + getAddGroupFlag().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static Model parseFrom(
+    public static com.arjim.server.model.proto.MessageProto.Model parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Model parseFrom(
+    public static com.arjim.server.model.proto.MessageProto.Model parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Model parseFrom(
+    public static com.arjim.server.model.proto.MessageProto.Model parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Model parseFrom(
+    public static com.arjim.server.model.proto.MessageProto.Model parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Model parseFrom(byte[] data)
+    public static com.arjim.server.model.proto.MessageProto.Model parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Model parseFrom(
+    public static com.arjim.server.model.proto.MessageProto.Model parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Model parseFrom(java.io.InputStream input)
+    public static com.arjim.server.model.proto.MessageProto.Model parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static Model parseFrom(
+    public static com.arjim.server.model.proto.MessageProto.Model parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static Model parseDelimitedFrom(java.io.InputStream input)
+    public static com.arjim.server.model.proto.MessageProto.Model parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static Model parseDelimitedFrom(
+    public static com.arjim.server.model.proto.MessageProto.Model parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static Model parseFrom(
+    public static com.arjim.server.model.proto.MessageProto.Model parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static Model parseFrom(
+    public static com.arjim.server.model.proto.MessageProto.Model parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -1830,7 +1907,7 @@ public final class MessageProto {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(Model prototype) {
+    public static Builder newBuilder(com.arjim.server.model.proto.MessageProto.Model prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -1838,9 +1915,9 @@ public final class MessageProto {
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @Override
+    @java.lang.Override
     protected Builder newBuilderForType(
-        BuilderParent parent) {
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -1850,17 +1927,17 @@ public final class MessageProto {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:com.arjim.server.model.proto.Model)
-        ModelOrBuilder {
+        com.arjim.server.model.proto.MessageProto.ModelOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return MessageProto.internal_static_com_arjim_server_model_proto_Model_descriptor;
+        return com.arjim.server.model.proto.MessageProto.internal_static_com_arjim_server_model_proto_Model_descriptor;
       }
 
-      protected FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return MessageProto.internal_static_com_arjim_server_model_proto_Model_fieldAccessorTable
+        return com.arjim.server.model.proto.MessageProto.internal_static_com_arjim_server_model_proto_Model_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                Model.class, Builder.class);
+                com.arjim.server.model.proto.MessageProto.Model.class, com.arjim.server.model.proto.MessageProto.Model.Builder.class);
       }
 
       // Construct using com.arjim.server.model.proto.MessageProto.Model.newBuilder()
@@ -1869,7 +1946,7 @@ public final class MessageProto {
       }
 
       private Builder(
-          BuilderParent parent) {
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -1926,28 +2003,30 @@ public final class MessageProto {
 
         vaType_ = "";
 
+        addGroupFlag_ = "";
+
         return this;
       }
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return MessageProto.internal_static_com_arjim_server_model_proto_Model_descriptor;
+        return com.arjim.server.model.proto.MessageProto.internal_static_com_arjim_server_model_proto_Model_descriptor;
       }
 
-      public Model getDefaultInstanceForType() {
-        return Model.getDefaultInstance();
+      public com.arjim.server.model.proto.MessageProto.Model getDefaultInstanceForType() {
+        return com.arjim.server.model.proto.MessageProto.Model.getDefaultInstance();
       }
 
-      public Model build() {
-        Model result = buildPartial();
+      public com.arjim.server.model.proto.MessageProto.Model build() {
+        com.arjim.server.model.proto.MessageProto.Model result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public Model buildPartial() {
-        Model result = new Model(this);
+      public com.arjim.server.model.proto.MessageProto.Model buildPartial() {
+        com.arjim.server.model.proto.MessageProto.Model result = new com.arjim.server.model.proto.MessageProto.Model(this);
         result.version_ = version_;
         result.deviceId_ = deviceId_;
         result.cmd_ = cmd_;
@@ -1971,6 +2050,7 @@ public final class MessageProto {
         result.senderPhoto_ = senderPhoto_;
         result.vagroupName_ = vagroupName_;
         result.vaType_ = vaType_;
+        result.addGroupFlag_ = addGroupFlag_;
         onBuilt();
         return result;
       }
@@ -1980,7 +2060,7 @@ public final class MessageProto {
       }
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
       public Builder clearField(
@@ -1993,25 +2073,25 @@ public final class MessageProto {
       }
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof Model) {
-          return mergeFrom((Model)other);
+        if (other instanceof com.arjim.server.model.proto.MessageProto.Model) {
+          return mergeFrom((com.arjim.server.model.proto.MessageProto.Model)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(Model other) {
-        if (other == Model.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.arjim.server.model.proto.MessageProto.Model other) {
+        if (other == com.arjim.server.model.proto.MessageProto.Model.getDefaultInstance()) return this;
         if (!other.getVersion().isEmpty()) {
           version_ = other.version_;
           onChanged();
@@ -2100,6 +2180,10 @@ public final class MessageProto {
           vaType_ = other.vaType_;
           onChanged();
         }
+        if (!other.getAddGroupFlag().isEmpty()) {
+          addGroupFlag_ = other.addGroupFlag_;
+          onChanged();
+        }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
@@ -2113,11 +2197,11 @@ public final class MessageProto {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        Model parsedMessage = null;
+        com.arjim.server.model.proto.MessageProto.Model parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (Model) e.getUnfinishedMessage();
+          parsedMessage = (com.arjim.server.model.proto.MessageProto.Model) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -2127,7 +2211,7 @@ public final class MessageProto {
         return this;
       }
 
-      private Object version_ = "";
+      private java.lang.Object version_ = "";
       /**
        * <pre>
        *接口版本号
@@ -2135,16 +2219,16 @@ public final class MessageProto {
        *
        * <code>string version = 1;</code>
        */
-      public String getVersion() {
-        Object ref = version_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getVersion() {
+        java.lang.Object ref = version_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+          java.lang.String s = bs.toStringUtf8();
           version_ = s;
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
@@ -2156,11 +2240,11 @@ public final class MessageProto {
        */
       public com.google.protobuf.ByteString
           getVersionBytes() {
-        Object ref = version_;
+        java.lang.Object ref = version_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+                  (java.lang.String) ref);
           version_ = b;
           return b;
         } else {
@@ -2175,7 +2259,7 @@ public final class MessageProto {
        * <code>string version = 1;</code>
        */
       public Builder setVersion(
-          String value) {
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -2216,7 +2300,7 @@ public final class MessageProto {
         return this;
       }
 
-      private Object deviceId_ = "";
+      private java.lang.Object deviceId_ = "";
       /**
        * <pre>
        *设备uuid
@@ -2224,16 +2308,16 @@ public final class MessageProto {
        *
        * <code>string deviceId = 2;</code>
        */
-      public String getDeviceId() {
-        Object ref = deviceId_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getDeviceId() {
+        java.lang.Object ref = deviceId_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+          java.lang.String s = bs.toStringUtf8();
           deviceId_ = s;
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
@@ -2245,11 +2329,11 @@ public final class MessageProto {
        */
       public com.google.protobuf.ByteString
           getDeviceIdBytes() {
-        Object ref = deviceId_;
+        java.lang.Object ref = deviceId_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+                  (java.lang.String) ref);
           deviceId_ = b;
           return b;
         } else {
@@ -2264,7 +2348,7 @@ public final class MessageProto {
        * <code>string deviceId = 2;</code>
        */
       public Builder setDeviceId(
-          String value) {
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -2343,7 +2427,7 @@ public final class MessageProto {
         return this;
       }
 
-      private Object sender_ = "";
+      private java.lang.Object sender_ = "";
       /**
        * <pre>
        *发送人
@@ -2351,16 +2435,16 @@ public final class MessageProto {
        *
        * <code>string sender = 4;</code>
        */
-      public String getSender() {
-        Object ref = sender_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getSender() {
+        java.lang.Object ref = sender_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+          java.lang.String s = bs.toStringUtf8();
           sender_ = s;
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
@@ -2372,11 +2456,11 @@ public final class MessageProto {
        */
       public com.google.protobuf.ByteString
           getSenderBytes() {
-        Object ref = sender_;
+        java.lang.Object ref = sender_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+                  (java.lang.String) ref);
           sender_ = b;
           return b;
         } else {
@@ -2391,7 +2475,7 @@ public final class MessageProto {
        * <code>string sender = 4;</code>
        */
       public Builder setSender(
-          String value) {
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -2432,7 +2516,7 @@ public final class MessageProto {
         return this;
       }
 
-      private Object receiver_ = "";
+      private java.lang.Object receiver_ = "";
       /**
        * <pre>
        *接收人
@@ -2440,16 +2524,16 @@ public final class MessageProto {
        *
        * <code>string receiver = 5;</code>
        */
-      public String getReceiver() {
-        Object ref = receiver_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getReceiver() {
+        java.lang.Object ref = receiver_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+          java.lang.String s = bs.toStringUtf8();
           receiver_ = s;
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
@@ -2461,11 +2545,11 @@ public final class MessageProto {
        */
       public com.google.protobuf.ByteString
           getReceiverBytes() {
-        Object ref = receiver_;
+        java.lang.Object ref = receiver_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+                  (java.lang.String) ref);
           receiver_ = b;
           return b;
         } else {
@@ -2480,7 +2564,7 @@ public final class MessageProto {
        * <code>string receiver = 5;</code>
        */
       public Builder setReceiver(
-          String value) {
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -2521,7 +2605,7 @@ public final class MessageProto {
         return this;
       }
 
-      private Object groupId_ = "";
+      private java.lang.Object groupId_ = "";
       /**
        * <pre>
        *用户组编号
@@ -2529,16 +2613,16 @@ public final class MessageProto {
        *
        * <code>string groupId = 6;</code>
        */
-      public String getGroupId() {
-        Object ref = groupId_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getGroupId() {
+        java.lang.Object ref = groupId_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+          java.lang.String s = bs.toStringUtf8();
           groupId_ = s;
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
@@ -2550,11 +2634,11 @@ public final class MessageProto {
        */
       public com.google.protobuf.ByteString
           getGroupIdBytes() {
-        Object ref = groupId_;
+        java.lang.Object ref = groupId_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+                  (java.lang.String) ref);
           groupId_ = b;
           return b;
         } else {
@@ -2569,7 +2653,7 @@ public final class MessageProto {
        * <code>string groupId = 6;</code>
        */
       public Builder setGroupId(
-          String value) {
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -2686,7 +2770,7 @@ public final class MessageProto {
         return this;
       }
 
-      private Object platform_ = "";
+      private java.lang.Object platform_ = "";
       /**
        * <pre>
        *mobile-ios mobile-android pc-windows pc-mac
@@ -2694,16 +2778,16 @@ public final class MessageProto {
        *
        * <code>string platform = 9;</code>
        */
-      public String getPlatform() {
-        Object ref = platform_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getPlatform() {
+        java.lang.Object ref = platform_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+          java.lang.String s = bs.toStringUtf8();
           platform_ = s;
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
@@ -2715,11 +2799,11 @@ public final class MessageProto {
        */
       public com.google.protobuf.ByteString
           getPlatformBytes() {
-        Object ref = platform_;
+        java.lang.Object ref = platform_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+                  (java.lang.String) ref);
           platform_ = b;
           return b;
         } else {
@@ -2734,7 +2818,7 @@ public final class MessageProto {
        * <code>string platform = 9;</code>
        */
       public Builder setPlatform(
-          String value) {
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -2775,7 +2859,7 @@ public final class MessageProto {
         return this;
       }
 
-      private Object platformVersion_ = "";
+      private java.lang.Object platformVersion_ = "";
       /**
        * <pre>
        *客户端版本号
@@ -2783,16 +2867,16 @@ public final class MessageProto {
        *
        * <code>string platformVersion = 10;</code>
        */
-      public String getPlatformVersion() {
-        Object ref = platformVersion_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getPlatformVersion() {
+        java.lang.Object ref = platformVersion_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+          java.lang.String s = bs.toStringUtf8();
           platformVersion_ = s;
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
@@ -2804,11 +2888,11 @@ public final class MessageProto {
        */
       public com.google.protobuf.ByteString
           getPlatformVersionBytes() {
-        Object ref = platformVersion_;
+        java.lang.Object ref = platformVersion_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+                  (java.lang.String) ref);
           platformVersion_ = b;
           return b;
         } else {
@@ -2823,7 +2907,7 @@ public final class MessageProto {
        * <code>string platformVersion = 10;</code>
        */
       public Builder setPlatformVersion(
-          String value) {
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -2864,7 +2948,7 @@ public final class MessageProto {
         return this;
       }
 
-      private Object token_ = "";
+      private java.lang.Object token_ = "";
       /**
        * <pre>
        *客户端凭证
@@ -2872,16 +2956,16 @@ public final class MessageProto {
        *
        * <code>string token = 11;</code>
        */
-      public String getToken() {
-        Object ref = token_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getToken() {
+        java.lang.Object ref = token_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+          java.lang.String s = bs.toStringUtf8();
           token_ = s;
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
@@ -2893,11 +2977,11 @@ public final class MessageProto {
        */
       public com.google.protobuf.ByteString
           getTokenBytes() {
-        Object ref = token_;
+        java.lang.Object ref = token_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+                  (java.lang.String) ref);
           token_ = b;
           return b;
         } else {
@@ -2912,7 +2996,7 @@ public final class MessageProto {
        * <code>string token = 11;</code>
        */
       public Builder setToken(
-          String value) {
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -2953,7 +3037,7 @@ public final class MessageProto {
         return this;
       }
 
-      private Object appKey_ = "";
+      private java.lang.Object appKey_ = "";
       /**
        * <pre>
        *客户端key
@@ -2961,16 +3045,16 @@ public final class MessageProto {
        *
        * <code>string appKey = 12;</code>
        */
-      public String getAppKey() {
-        Object ref = appKey_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getAppKey() {
+        java.lang.Object ref = appKey_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+          java.lang.String s = bs.toStringUtf8();
           appKey_ = s;
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
@@ -2982,11 +3066,11 @@ public final class MessageProto {
        */
       public com.google.protobuf.ByteString
           getAppKeyBytes() {
-        Object ref = appKey_;
+        java.lang.Object ref = appKey_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+                  (java.lang.String) ref);
           appKey_ = b;
           return b;
         } else {
@@ -3001,7 +3085,7 @@ public final class MessageProto {
        * <code>string appKey = 12;</code>
        */
       public Builder setAppKey(
-          String value) {
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -3042,7 +3126,7 @@ public final class MessageProto {
         return this;
       }
 
-      private Object timeStamp_ = "";
+      private java.lang.Object timeStamp_ = "";
       /**
        * <pre>
        *时间戳
@@ -3050,16 +3134,16 @@ public final class MessageProto {
        *
        * <code>string timeStamp = 13;</code>
        */
-      public String getTimeStamp() {
-        Object ref = timeStamp_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getTimeStamp() {
+        java.lang.Object ref = timeStamp_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+          java.lang.String s = bs.toStringUtf8();
           timeStamp_ = s;
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
@@ -3071,11 +3155,11 @@ public final class MessageProto {
        */
       public com.google.protobuf.ByteString
           getTimeStampBytes() {
-        Object ref = timeStamp_;
+        java.lang.Object ref = timeStamp_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+                  (java.lang.String) ref);
           timeStamp_ = b;
           return b;
         } else {
@@ -3090,7 +3174,7 @@ public final class MessageProto {
        * <code>string timeStamp = 13;</code>
        */
       public Builder setTimeStamp(
-          String value) {
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -3131,7 +3215,7 @@ public final class MessageProto {
         return this;
       }
 
-      private Object sign_ = "";
+      private java.lang.Object sign_ = "";
       /**
        * <pre>
        *签名 
@@ -3139,16 +3223,16 @@ public final class MessageProto {
        *
        * <code>string sign = 14;</code>
        */
-      public String getSign() {
-        Object ref = sign_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getSign() {
+        java.lang.Object ref = sign_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+          java.lang.String s = bs.toStringUtf8();
           sign_ = s;
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
@@ -3160,11 +3244,11 @@ public final class MessageProto {
        */
       public com.google.protobuf.ByteString
           getSignBytes() {
-        Object ref = sign_;
+        java.lang.Object ref = sign_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+                  (java.lang.String) ref);
           sign_ = b;
           return b;
         } else {
@@ -3179,7 +3263,7 @@ public final class MessageProto {
        * <code>string sign = 14;</code>
        */
       public Builder setSign(
-          String value) {
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -3261,7 +3345,7 @@ public final class MessageProto {
         return this;
       }
 
-      private Object resSign_ = "";
+      private java.lang.Object resSign_ = "";
       /**
        * <pre>
        *响应标志位： agree 同意  refuse 拒绝
@@ -3269,16 +3353,16 @@ public final class MessageProto {
        *
        * <code>string resSign = 16;</code>
        */
-      public String getResSign() {
-        Object ref = resSign_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getResSign() {
+        java.lang.Object ref = resSign_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+          java.lang.String s = bs.toStringUtf8();
           resSign_ = s;
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
@@ -3290,11 +3374,11 @@ public final class MessageProto {
        */
       public com.google.protobuf.ByteString
           getResSignBytes() {
-        Object ref = resSign_;
+        java.lang.Object ref = resSign_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+                  (java.lang.String) ref);
           resSign_ = b;
           return b;
         } else {
@@ -3309,7 +3393,7 @@ public final class MessageProto {
        * <code>string resSign = 16;</code>
        */
       public Builder setResSign(
-          String value) {
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -3350,7 +3434,7 @@ public final class MessageProto {
         return this;
       }
 
-      private Object reqType_ = "";
+      private java.lang.Object reqType_ = "";
       /**
        * <pre>
        *请求方式 ptop 单聊  group 多聊
@@ -3358,16 +3442,16 @@ public final class MessageProto {
        *
        * <code>string reqType = 17;</code>
        */
-      public String getReqType() {
-        Object ref = reqType_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getReqType() {
+        java.lang.Object ref = reqType_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+          java.lang.String s = bs.toStringUtf8();
           reqType_ = s;
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
@@ -3379,11 +3463,11 @@ public final class MessageProto {
        */
       public com.google.protobuf.ByteString
           getReqTypeBytes() {
-        Object ref = reqType_;
+        java.lang.Object ref = reqType_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+                  (java.lang.String) ref);
           reqType_ = b;
           return b;
         } else {
@@ -3398,7 +3482,7 @@ public final class MessageProto {
        * <code>string reqType = 17;</code>
        */
       public Builder setReqType(
-          String value) {
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -3439,7 +3523,7 @@ public final class MessageProto {
         return this;
       }
 
-      private Object vagroupId_ = "";
+      private java.lang.Object vagroupId_ = "";
       /**
        * <pre>
        *视频语音群组ID，房间号	 
@@ -3447,16 +3531,16 @@ public final class MessageProto {
        *
        * <code>string vagroupId = 18;</code>
        */
-      public String getVagroupId() {
-        Object ref = vagroupId_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getVagroupId() {
+        java.lang.Object ref = vagroupId_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+          java.lang.String s = bs.toStringUtf8();
           vagroupId_ = s;
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
@@ -3468,11 +3552,11 @@ public final class MessageProto {
        */
       public com.google.protobuf.ByteString
           getVagroupIdBytes() {
-        Object ref = vagroupId_;
+        java.lang.Object ref = vagroupId_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+                  (java.lang.String) ref);
           vagroupId_ = b;
           return b;
         } else {
@@ -3487,7 +3571,7 @@ public final class MessageProto {
        * <code>string vagroupId = 18;</code>
        */
       public Builder setVagroupId(
-          String value) {
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -3528,7 +3612,7 @@ public final class MessageProto {
         return this;
       }
 
-      private Object callType_ = "";
+      private java.lang.Object callType_ = "";
       /**
        * <pre>
        *呼叫方式 发起者/接收者  caller/callee 
@@ -3536,16 +3620,16 @@ public final class MessageProto {
        *
        * <code>string callType = 19;</code>
        */
-      public String getCallType() {
-        Object ref = callType_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getCallType() {
+        java.lang.Object ref = callType_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+          java.lang.String s = bs.toStringUtf8();
           callType_ = s;
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
@@ -3557,11 +3641,11 @@ public final class MessageProto {
        */
       public com.google.protobuf.ByteString
           getCallTypeBytes() {
-        Object ref = callType_;
+        java.lang.Object ref = callType_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+                  (java.lang.String) ref);
           callType_ = b;
           return b;
         } else {
@@ -3576,7 +3660,7 @@ public final class MessageProto {
        * <code>string callType = 19;</code>
        */
       public Builder setCallType(
-          String value) {
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -3617,7 +3701,7 @@ public final class MessageProto {
         return this;
       }
 
-      private Object senderName_ = "";
+      private java.lang.Object senderName_ = "";
       /**
        * <pre>
        *发送人姓名
@@ -3625,16 +3709,16 @@ public final class MessageProto {
        *
        * <code>string senderName = 20;</code>
        */
-      public String getSenderName() {
-        Object ref = senderName_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getSenderName() {
+        java.lang.Object ref = senderName_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+          java.lang.String s = bs.toStringUtf8();
           senderName_ = s;
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
@@ -3646,11 +3730,11 @@ public final class MessageProto {
        */
       public com.google.protobuf.ByteString
           getSenderNameBytes() {
-        Object ref = senderName_;
+        java.lang.Object ref = senderName_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+                  (java.lang.String) ref);
           senderName_ = b;
           return b;
         } else {
@@ -3665,7 +3749,7 @@ public final class MessageProto {
        * <code>string senderName = 20;</code>
        */
       public Builder setSenderName(
-          String value) {
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -3706,7 +3790,7 @@ public final class MessageProto {
         return this;
       }
 
-      private Object senderPhoto_ = "";
+      private java.lang.Object senderPhoto_ = "";
       /**
        * <pre>
        *发送人头像
@@ -3714,16 +3798,16 @@ public final class MessageProto {
        *
        * <code>string senderPhoto = 21;</code>
        */
-      public String getSenderPhoto() {
-        Object ref = senderPhoto_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getSenderPhoto() {
+        java.lang.Object ref = senderPhoto_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+          java.lang.String s = bs.toStringUtf8();
           senderPhoto_ = s;
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
@@ -3735,11 +3819,11 @@ public final class MessageProto {
        */
       public com.google.protobuf.ByteString
           getSenderPhotoBytes() {
-        Object ref = senderPhoto_;
+        java.lang.Object ref = senderPhoto_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+                  (java.lang.String) ref);
           senderPhoto_ = b;
           return b;
         } else {
@@ -3754,7 +3838,7 @@ public final class MessageProto {
        * <code>string senderPhoto = 21;</code>
        */
       public Builder setSenderPhoto(
-          String value) {
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -3795,7 +3879,7 @@ public final class MessageProto {
         return this;
       }
 
-      private Object vagroupName_ = "";
+      private java.lang.Object vagroupName_ = "";
       /**
        * <pre>
        *视频语音群组名称，房间名称
@@ -3803,16 +3887,16 @@ public final class MessageProto {
        *
        * <code>string vagroupName = 22;</code>
        */
-      public String getVagroupName() {
-        Object ref = vagroupName_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getVagroupName() {
+        java.lang.Object ref = vagroupName_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+          java.lang.String s = bs.toStringUtf8();
           vagroupName_ = s;
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
@@ -3824,11 +3908,11 @@ public final class MessageProto {
        */
       public com.google.protobuf.ByteString
           getVagroupNameBytes() {
-        Object ref = vagroupName_;
+        java.lang.Object ref = vagroupName_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+                  (java.lang.String) ref);
           vagroupName_ = b;
           return b;
         } else {
@@ -3843,7 +3927,7 @@ public final class MessageProto {
        * <code>string vagroupName = 22;</code>
        */
       public Builder setVagroupName(
-          String value) {
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -3884,40 +3968,40 @@ public final class MessageProto {
         return this;
       }
 
-      private Object vaType_ = "";
+      private java.lang.Object vaType_ = "";
       /**
        * <pre>
-       *&#47;/视频，或语音类型
+       *&#47;/视频，或语音类型	 
        * </pre>
        *
        * <code>string vaType = 23;</code>
        */
-      public String getVaType() {
-        Object ref = vaType_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getVaType() {
+        java.lang.Object ref = vaType_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+          java.lang.String s = bs.toStringUtf8();
           vaType_ = s;
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
        * <pre>
-       *&#47;/视频，或语音类型
+       *&#47;/视频，或语音类型	 
        * </pre>
        *
        * <code>string vaType = 23;</code>
        */
       public com.google.protobuf.ByteString
           getVaTypeBytes() {
-        Object ref = vaType_;
+        java.lang.Object ref = vaType_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+                  (java.lang.String) ref);
           vaType_ = b;
           return b;
         } else {
@@ -3926,13 +4010,13 @@ public final class MessageProto {
       }
       /**
        * <pre>
-       *&#47;/视频，或语音类型
+       *&#47;/视频，或语音类型	 
        * </pre>
        *
        * <code>string vaType = 23;</code>
        */
       public Builder setVaType(
-          String value) {
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -3943,7 +4027,7 @@ public final class MessageProto {
       }
       /**
        * <pre>
-       *&#47;/视频，或语音类型
+       *&#47;/视频，或语音类型	 
        * </pre>
        *
        * <code>string vaType = 23;</code>
@@ -3956,7 +4040,7 @@ public final class MessageProto {
       }
       /**
        * <pre>
-       *&#47;/视频，或语音类型
+       *&#47;/视频，或语音类型	 
        * </pre>
        *
        * <code>string vaType = 23;</code>
@@ -3969,6 +4053,95 @@ public final class MessageProto {
   checkByteStringIsUtf8(value);
         
         vaType_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object addGroupFlag_ = "";
+      /**
+       * <pre>
+       *是否创建新的群组 true:是 flase:否
+       * </pre>
+       *
+       * <code>string addGroupFlag = 24;</code>
+       */
+      public java.lang.String getAddGroupFlag() {
+        java.lang.Object ref = addGroupFlag_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          addGroupFlag_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       *是否创建新的群组 true:是 flase:否
+       * </pre>
+       *
+       * <code>string addGroupFlag = 24;</code>
+       */
+      public com.google.protobuf.ByteString
+          getAddGroupFlagBytes() {
+        java.lang.Object ref = addGroupFlag_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          addGroupFlag_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       *是否创建新的群组 true:是 flase:否
+       * </pre>
+       *
+       * <code>string addGroupFlag = 24;</code>
+       */
+      public Builder setAddGroupFlag(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        addGroupFlag_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *是否创建新的群组 true:是 flase:否
+       * </pre>
+       *
+       * <code>string addGroupFlag = 24;</code>
+       */
+      public Builder clearAddGroupFlag() {
+        
+        addGroupFlag_ = getDefaultInstance().getAddGroupFlag();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *是否创建新的群组 true:是 flase:否
+       * </pre>
+       *
+       * <code>string addGroupFlag = 24;</code>
+       */
+      public Builder setAddGroupFlagBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        addGroupFlag_ = value;
         onChanged();
         return this;
       }
@@ -3987,12 +4160,12 @@ public final class MessageProto {
     }
 
     // @@protoc_insertion_point(class_scope:com.arjim.server.model.proto.Model)
-    private static final Model DEFAULT_INSTANCE;
+    private static final com.arjim.server.model.proto.MessageProto.Model DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new Model();
+      DEFAULT_INSTANCE = new com.arjim.server.model.proto.MessageProto.Model();
     }
 
-    public static Model getDefaultInstance() {
+    public static com.arjim.server.model.proto.MessageProto.Model getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
@@ -4010,12 +4183,12 @@ public final class MessageProto {
       return PARSER;
     }
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Parser<Model> getParserForType() {
       return PARSER;
     }
 
-    public Model getDefaultInstanceForType() {
+    public com.arjim.server.model.proto.MessageProto.Model getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -4034,9 +4207,9 @@ public final class MessageProto {
   private static  com.google.protobuf.Descriptors.FileDescriptor
       descriptor;
   static {
-    String[] descriptorData = {
+    java.lang.String[] descriptorData = {
       "\n\030proto/java/Message.proto\022\034com.arjim.se" +
-      "rver.model.proto\"\232\003\n\005Model\022\017\n\007version\030\001 " +
+      "rver.model.proto\"\260\003\n\005Model\022\017\n\007version\030\001 " +
       "\001(\t\022\020\n\010deviceId\030\002 \001(\t\022\013\n\003cmd\030\003 \001(\r\022\016\n\006se" +
       "nder\030\004 \001(\t\022\020\n\010receiver\030\005 \001(\t\022\017\n\007groupId\030" +
       "\006 \001(\t\022\017\n\007msgtype\030\007 \001(\r\022\014\n\004flag\030\010 \001(\r\022\020\n\010" +
@@ -4046,8 +4219,8 @@ public final class MessageProto {
       "\022\017\n\007resSign\030\020 \001(\t\022\017\n\007reqType\030\021 \001(\t\022\021\n\tva" +
       "groupId\030\022 \001(\t\022\020\n\010callType\030\023 \001(\t\022\022\n\nsende",
       "rName\030\024 \001(\t\022\023\n\013senderPhoto\030\025 \001(\t\022\023\n\013vagr" +
-      "oupName\030\026 \001(\t\022\016\n\006vaType\030\027 \001(\tB\016B\014Message" +
-      "Protob\006proto3"
+      "oupName\030\026 \001(\t\022\016\n\006vaType\030\027 \001(\t\022\024\n\014addGrou" +
+      "pFlag\030\030 \001(\tB\016B\014MessageProtob\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -4066,7 +4239,7 @@ public final class MessageProto {
     internal_static_com_arjim_server_model_proto_Model_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_arjim_server_model_proto_Model_descriptor,
-        new String[] { "Version", "DeviceId", "Cmd", "Sender", "Receiver", "GroupId", "Msgtype", "Flag", "Platform", "PlatformVersion", "Token", "AppKey", "TimeStamp", "Sign", "Content", "ResSign", "ReqType", "VagroupId", "CallType", "SenderName", "SenderPhoto", "VagroupName", "VaType", });
+        new java.lang.String[] { "Version", "DeviceId", "Cmd", "Sender", "Receiver", "GroupId", "Msgtype", "Flag", "Platform", "PlatformVersion", "Token", "AppKey", "TimeStamp", "Sign", "Content", "ResSign", "ReqType", "VagroupId", "CallType", "SenderName", "SenderPhoto", "VagroupName", "VaType", "AddGroupFlag", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

@@ -171,6 +171,7 @@
 		a.photo avatar,
 		a.remarks sign,
 		'offline' status,
+		1 statusNo,
 		o.`name` groupname
 		FROM sys_user a, sys_user_dept  b ,sys_depart o
 		<where>

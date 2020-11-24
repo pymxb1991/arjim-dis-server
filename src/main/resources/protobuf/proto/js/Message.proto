@@ -24,5 +24,7 @@ message Model {
      string senderPhoto = 21; //发送人头像
      string vagroupName = 22; ////视频语音群组名称，房间名称
      string vaType = 23; ////视频，或语音类型
+     string addGroupFlag = 24; //是否创建新的群组 true:是 flase:否
+
 }
  

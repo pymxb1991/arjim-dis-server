@@ -42,8 +42,11 @@ public class ImWebSocketServerHandler extends SimpleChannelInboundHandler<Messag
 	@Override
 	public void userEventTriggered(ChannelHandlerContext ctx, Object o) throws Exception {
 		String sessionId = ctx.channel().attr(Constants.SessionConfig.SERVER_SESSION_ID).get();
+		System.out.println("isActive ：isActive: "+ctx.channel().isActive() +"  Date:" + new Date());
+		System.out.println("心跳发送 ：sessionId: "+sessionId +"  Date:" + new Date());
 		// // 服务端发个心跳包，客户端要回一个才行（
 		if (o instanceof IdleStateEvent && ((IdleStateEvent) o).state().equals(IdleState.WRITER_IDLE)) {
+
 			if (StringUtils.isNotEmpty(sessionId)) {
 				MessageProto.Model.Builder builder = MessageProto.Model.newBuilder();
 				builder.setCmd(Constants.CmdType.HEARTBEAT);

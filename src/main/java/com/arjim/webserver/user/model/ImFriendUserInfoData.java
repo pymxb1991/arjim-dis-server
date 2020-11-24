@@ -9,6 +9,7 @@ public class ImFriendUserInfoData {
 	private String sign;// 签名
 	private String groupname;
 	private String status;
+	private Integer statusNo;
 	private Long sipUserName; // SIP帐号
 	private String sipPassword; // SIP密码
 
@@ -74,5 +75,13 @@ public class ImFriendUserInfoData {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public Integer getStatusNo() {
+		return statusNo;
+	}
+
+	public void setStatusNo(Integer statusNo) {
+		this.statusNo = statusNo;
 	}
 }
